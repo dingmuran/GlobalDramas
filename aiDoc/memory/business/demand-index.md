@@ -6,6 +6,8 @@
 
 ## Done
 
+- [后台仅保留运营与版权方角色](done/backoffice-only.md)
+
 - [本地 DBX 连接项目 PostgreSQL](done/dbx-local-connection.md)
 
 - [Global Dramas 三角色本地业务平台](done/drama-platform.md)

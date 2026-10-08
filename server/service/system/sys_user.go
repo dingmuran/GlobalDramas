@@ -55,6 +55,9 @@ func (userService *UserService) Login(u *system.SysUser) (userInter *system.SysU
 		if ok := utils.BcryptCheck(u.Password, user.Password); !ok {
 			return nil, errors.New("密码错误")
 		}
+		if user.AuthorityId != 300 && user.AuthorityId != 888 {
+			return nil, errors.New("此账号无后台管理权限，请使用观众前台")
+		}
 		MenuServiceApp.UserAuthorityDefaultRouter(&user)
 	}
 	return &user, err

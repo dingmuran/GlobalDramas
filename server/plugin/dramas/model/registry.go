@@ -115,13 +115,13 @@ var Resources = map[string]Resource{
 		{Key: "source", Column: "source", Label: "注册来源", Type: "text", Required: false, Options: []string{}, Ref: ""},
 		{Key: "notes", Column: "notes", Label: "备注", Type: "textarea", Required: false, Options: []string{}, Ref: ""},
 	}},
-	"history": {Key: "history", Title: "观看历史", Read: []uint{888, 200}, Write: []uint{888, 200}, Scope: "user", New: func() any { return &History{} }, List: func() any { return &[]History{} }, Fields: []Field{
+	"history": {Key: "history", Title: "观看历史", Read: []uint{888, 200}, Write: []uint{200}, Scope: "user", New: func() any { return &History{} }, List: func() any { return &[]History{} }, Fields: []Field{
 		{Key: "episodeId", Column: "episode_id", Label: "单集ID", Type: "number", Required: true, Options: []string{}, Ref: "episodes"},
 		{Key: "positionSeconds", Column: "position_seconds", Label: "播放位置（秒）", Type: "number", Required: false, Options: []string{}, Ref: ""},
 		{Key: "watchedSeconds", Column: "watched_seconds", Label: "累计观看（秒）", Type: "number", Required: false, Options: []string{}, Ref: ""},
 		{Key: "source", Column: "source", Label: "流量来源", Type: "text", Required: false, Options: []string{}, Ref: ""},
 	}},
-	"favorites": {Key: "favorites", Title: "我的收藏", Read: []uint{888, 200}, Write: []uint{888, 200}, Scope: "user", New: func() any { return &Favorites{} }, List: func() any { return &[]Favorites{} }, Fields: []Field{
+	"favorites": {Key: "favorites", Title: "用户收藏", Read: []uint{888, 200}, Write: []uint{200}, Scope: "user", New: func() any { return &Favorites{} }, List: func() any { return &[]Favorites{} }, Fields: []Field{
 		{Key: "dramaId", Column: "drama_id", Label: "剧集ID", Type: "number", Required: true, Options: []string{}, Ref: "dramas"},
 	}},
 	"entitlements": {Key: "entitlements", Title: "单集权益", Read: []uint{888, 200}, Write: []uint{}, Scope: "user", New: func() any { return &Entitlements{} }, List: func() any { return &[]Entitlements{} }, Fields: []Field{
@@ -144,7 +144,7 @@ var Resources = map[string]Resource{
 		{Key: "reference", Column: "reference", Label: "关联编号", Type: "text", Required: false, Options: []string{}, Ref: ""},
 		{Key: "description", Column: "description", Label: "说明", Type: "text", Required: false, Options: []string{}, Ref: ""},
 	}},
-	"orders": {Key: "orders", Title: "订单", Read: []uint{888, 300, 200}, Write: []uint{888, 200}, Scope: "user", New: func() any { return &Orders{} }, List: func() any { return &[]Orders{} }, Fields: []Field{
+	"orders": {Key: "orders", Title: "订单", Read: []uint{888, 300, 200}, Write: []uint{200}, Scope: "user", New: func() any { return &Orders{} }, List: func() any { return &[]Orders{} }, Fields: []Field{
 		{Key: "kind", Column: "kind", Label: "订单类型", Type: "select", Required: true, Options: []string{"episode", "membership", "renewal"}, Ref: ""},
 		{Key: "episodeId", Column: "episode_id", Label: "单集ID", Type: "number", Required: false, Options: []string{}, Ref: "episodes"},
 		{Key: "planId", Column: "plan_id", Label: "套餐ID", Type: "number", Required: false, Options: []string{}, Ref: "plans"},
@@ -167,7 +167,7 @@ var Resources = map[string]Resource{
 		{Key: "result", Column: "result", Label: "查询或恢复结果", Type: "textarea", Required: true, Options: []string{}, Ref: ""},
 		{Key: "evidenceUrl", Column: "evidence_url", Label: "凭据地址", Type: "url", Required: false, Options: []string{}, Ref: ""},
 	}},
-	"ads": {Key: "ads", Title: "广告尝试", Read: []uint{888, 200}, Write: []uint{888, 200}, Scope: "user", New: func() any { return &Ads{} }, List: func() any { return &[]Ads{} }, Fields: []Field{
+	"ads": {Key: "ads", Title: "广告尝试", Read: []uint{888, 200}, Write: []uint{200}, Scope: "user", New: func() any { return &Ads{} }, List: func() any { return &[]Ads{} }, Fields: []Field{
 		{Key: "episodeId", Column: "episode_id", Label: "目标单集ID", Type: "number", Required: true, Options: []string{}, Ref: "episodes"},
 		{Key: "network", Column: "network", Label: "广告平台", Type: "text", Required: true, Options: []string{}, Ref: ""},
 		{Key: "placement", Column: "placement", Label: "广告位", Type: "text", Required: true, Options: []string{}, Ref: ""},

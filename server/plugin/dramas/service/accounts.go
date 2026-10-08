@@ -34,8 +34,8 @@ func (s PlatformService) CreateAccount(a Actor, in req.Account) (any, error) {
 	if len(in.Password) < 12 || len(in.Password) > 72 {
 		return nil, errors.New("密码须为12至72字节")
 	}
-	if in.Role != 200 && in.Role != 300 && in.Role != 888 {
-		return nil, errors.New("角色无效")
+	if in.Role != 300 && in.Role != 888 {
+		return nil, errors.New("后台仅允许版权方 / 制片方或超级管理员角色")
 	}
 	if in.NickName == "" {
 		in.NickName = in.Username

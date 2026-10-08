@@ -2,7 +2,7 @@
 
 入口：`server/plugin/dramas` → initialize → router → api → service → model；前端 `web/src/plugin/dramas/api/platform.js`、`view/workspace.vue`。
 
-所有接口均使用现有 JWT + Casbin。角色：200 观众、300 版权方/制片方、888 超级管理员。除登录与现有验证码接口，不新增匿名接口。
+所有后台接口均使用现有 JWT + Casbin。后台角色：300 版权方/制片方、888 超级管理员。200仅为保留服务中的H5观众身份标记，不注册后台角色、菜单或API权限，不能登录后台。除登录与现有验证码接口，不新增匿名接口。
 
 统一响应 `{code,data,msg}`；code=0 成功，code=7 业务失败。分页 `{list,total,page,pageSize}`。新业务模型 JSON 使用 `id/createdAt/updatedAt`，现有系统账号沿用 `ID/userName`。时间使用 RFC3339，金额在数据库/Go中为带币种的 int64 最小货币单位；金额响应字段使用十进制字符串避免JavaScript解析丢失精度，前端直接拆分十进制字符串格式化。表单请求用整数，服务端也限制到JS安全整数范围；CSV输入同样校验。
 
@@ -13,19 +13,19 @@
 | GET | /dramas/records/:resource | page、pageSize≤100、search、status、dramaId、id；分页列表 |
 | POST | /dramas/records/:resource | 资源可写字段；创建后返回完整记录 |
 | PUT | /dramas/records/:resource/:id | 资源可写字段；编辑后返回完整记录 |
-| DELETE | /dramas/records/:resource/:id | 仅允许草稿内容或取消收藏；引用存在时拒绝 |
+| DELETE | /dramas/records/:resource/:id | 后台仅允许删除草稿内容；引用存在时拒绝 |
 | POST | /dramas/actions/:resource/:id | action、note、evidence、decision、start、count |
-| GET | /dramas/playback/:id | episode、allowed、reason、adsEnabled；无权益不返回 videoUrl |
-| POST | /dramas/events | episodeId、event(play/progress/complete/buffer/error)、source、sessionId、startupMs、bufferMs、positionSeconds、watchedSeconds（0–120） |
 | GET | /dramas/preview | dramaId、at(RFC3339)；按时间预览已激活策略，管理员专用 |
-| GET / POST | /dramas/accounts | 管理员查询账号 / 创建 username、password(12–72字节)、nickName、role |
+| GET / POST | /dramas/accounts | 管理员查询后台/前台账号 / 创建 username、password(12–72字节)、nickName、role（仅300/888） |
 | POST | /dramas/bills/import | multipart file；CSV原子导入，≤2MB、≤2000行 |
 
 资源与可写字段完整清单见 `docs/dramas-resources.json` 和 `docs/DRAMAS-DATABASE.md`。归属、用户、状态、计算金额、履约、发奖结果不可通过通用保存接口修改。
 
 ## 归属与状态
 
-观众：只读已发布且在授权期内的剧集和单集、已上架套餐；其历史、收藏、权益、订单、订阅、退款、广告、钱包和反馈限制为本人。单集列表隐藏视频地址。版权方：限制 owner_id 为当前账号。管理员：可查看全量数据，敏感动作仍需审批。
+保留的H5业务服务：只读已发布且在授权期内的剧集和单集、已上架套餐；其历史、收藏、权益、订单、订阅、退款、广告、钱包和反馈限制为本人。单集列表隐藏视频地址；尚未发布前台HTTP接口，不能通过后台路由调用。版权方：限制 owner_id 为当前账号。管理员：可查看全量数据，敏感动作仍需审批。
+
+后台已移除观众发现、播放器、收藏、购买及观看事件UI；播放/事件HTTP端点不再注册。底层服务、模型与历史数据保留，H5需接入独立观众认证、专用前台API和支付/广告平台验证。启动迁移幂等清理角色200及关联菜单、数据权限和Casbin权限，不删除sys_users或gd_*业务记录，不将观众升级为管理员。
 
 剧集：draft/rejected/offline → submit → pending_review → 管理员 approve/reject → approved/rejected → publish → published → offline。发布前核对授权、计划集数、素材与100%处理进度；待审核及发布内容禁止编辑单集。授权到期按分钟自动下架并告警，播放接口即时校验期限。version 保存快照；batch 在可编辑状态下创建最多200集，不重复创建现有集数。
 
@@ -41,4 +41,4 @@ feedback resolve 记录客服回复；alerts resolve 同时生成恢复记录；
 
 当前运行版支持真实本地业务记录、人工核对凭据和双人审批，不会发起实际扣款、退款或转账。Apple/Google支付、订阅实时同步、广告SDK和服务端验签、转码/上传/CDN尚未接入；需要相应平台账号与密钥才能上线。syncs/recoveries 提供实际人工查询结果登记，不能当作平台已完成实时同步。视频URL权限只控制接口披露，生产素材需私有存储与短时签名URL。
 
-播放事件来自登录观众，属于客户端上报指标，不能替代支付/广告平台凭据。留存按首次播放日分组，尚未到观察日期的 D1/D7 显示“观察中”。事件汇总不将 progress 当作新播放。没有业务数据时显示0或空列表，不写入演示数据。
+保留的播放事件服务面向H5观众，属于客户端上报指标，不能替代支付/广告平台凭据；当前观众认证和事件HTTP接口待H5接入。后台观看历史、收藏、订单和广告尝试不提供通用创建或编辑，超级管理员仅查询并执行核验、审批与售后动作。留存按首次播放日分组，尚未到观察日期的 D1/D7 显示“观察中”。事件汇总不将 progress 当作新播放。没有业务数据时显示0或空列表，不写入演示数据。

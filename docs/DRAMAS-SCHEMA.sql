@@ -1468,7 +1468,7 @@ CREATE TABLE public.gd_favorites (
 -- Name: TABLE gd_favorites; Type: COMMENT; Schema: public; Owner: -
 --
 
-COMMENT ON TABLE public.gd_favorites IS '我的收藏';
+COMMENT ON TABLE public.gd_favorites IS '用户收藏';
 
 
 --

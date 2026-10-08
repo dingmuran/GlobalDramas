@@ -21,6 +21,11 @@ func (PlatformRouter) Init(g *gin.RouterGroup) {
 			return
 		}
 		role := utils.GetUserAuthorityId(c)
+		if role != 300 && role != 888 {
+			response.NoAuth("此账号无后台管理权限", c)
+			c.Abort()
+			return
+		}
 		valid := user.AuthorityId == role
 		for _, r := range user.Authorities {
 			if r.AuthorityId == role {
@@ -38,7 +43,6 @@ func (PlatformRouter) Init(g *gin.RouterGroup) {
 	r.GET("schema", platformApi.Schema)
 	r.GET("overview", platformApi.Overview)
 	r.GET("records/:resource", platformApi.List)
-	r.GET("playback/:id", platformApi.Playback)
 	r.GET("preview", platformApi.Preview)
 	r.GET("accounts", platformApi.Accounts)
 	w := r.Group("")
@@ -46,7 +50,6 @@ func (PlatformRouter) Init(g *gin.RouterGroup) {
 	w.PUT("records/:resource/:id", platformApi.Update)
 	w.DELETE("records/:resource/:id", platformApi.Delete)
 	w.POST("actions/:resource/:id", platformApi.Action)
-	w.POST("events", platformApi.Event)
 	w.POST("accounts", platformApi.CreateAccount)
 	w.POST("bills/import", platformApi.Import)
 }

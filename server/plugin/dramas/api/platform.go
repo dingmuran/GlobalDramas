@@ -93,7 +93,7 @@ func save(c *gin.Context, n uint) {
 	reply(c, v, e)
 }
 
-// @Summary 删除草稿或取消收藏；业务流水不可删除
+// @Summary 删除后台草稿内容；用户行为和业务流水不可删除
 // @Tags GlobalDramas
 // @Security ApiKeyAuth
 // @Param resource path string true "资源键"
@@ -120,32 +120,6 @@ func (PlatformApi) Action(c *gin.Context) {
 	}
 	v, e := platform.Action(actor(c), c.Param("resource"), id(c), in)
 	reply(c, v, e)
-}
-
-// @Summary 查询单集播放权限；无权益不返回视频地址
-// @Tags GlobalDramas
-// @Security ApiKeyAuth
-// @Param id path int true "单集ID"
-// @Success 200 {object} response.Response
-// @Router /dramas/playback/{id} [get]
-func (PlatformApi) Playback(c *gin.Context) {
-	v, e := platform.Playback(actor(c), id(c))
-	reply(c, v, e)
-}
-
-// @Summary 记录有观看权益的观众播放事件
-// @Tags GlobalDramas
-// @Security ApiKeyAuth
-// @Param body body req.PlaybackEvent true "播放指标"
-// @Success 200 {object} response.Response
-// @Router /dramas/events [post]
-func (PlatformApi) Event(c *gin.Context) {
-	var in req.PlaybackEvent
-	if e := c.ShouldBindJSON(&in); e != nil {
-		reply(c, nil, e)
-		return
-	}
-	reply(c, nil, platform.Event(actor(c), in))
 }
 
 // @Summary 按剧与指定时间预览已激活策略的覆盖结果
@@ -177,7 +151,7 @@ func (PlatformApi) Preview(c *gin.Context) {
 // @Router /dramas/accounts [get]
 func (PlatformApi) Accounts(c *gin.Context) { v, e := platform.Accounts(actor(c)); reply(c, v, e) }
 
-// @Summary 创建指定三类角色的登录账号
+// @Summary 创建版权方 / 制片方或超级管理员后台账号
 // @Tags GlobalDramas
 // @Security ApiKeyAuth
 // @Param body body req.Account true "账号信息"

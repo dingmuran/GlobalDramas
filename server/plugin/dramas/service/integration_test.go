@@ -8,12 +8,15 @@ import (
 	"github.com/dingmuran/GlobalDramasAdmin/server/initialize"
 	"github.com/dingmuran/GlobalDramasAdmin/server/middleware"
 	"github.com/dingmuran/GlobalDramasAdmin/server/model/system"
+	dramaInit "github.com/dingmuran/GlobalDramasAdmin/server/plugin/dramas/initialize"
 	"github.com/dingmuran/GlobalDramasAdmin/server/plugin/dramas/model"
 	req "github.com/dingmuran/GlobalDramasAdmin/server/plugin/dramas/model/request"
 	"github.com/dingmuran/GlobalDramasAdmin/server/plugin/dramas/router"
 	"github.com/dingmuran/GlobalDramasAdmin/server/plugin/dramas/service"
+	systemService "github.com/dingmuran/GlobalDramasAdmin/server/service/system"
 	"github.com/dingmuran/GlobalDramasAdmin/server/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"net/http"
 	"net/http/httptest"
 	"os"
@@ -58,9 +61,25 @@ func TestPlatformPostgreSQLWorkflow(t *testing.T) {
 		u := v.(system.SysUser)
 		return service.Actor{ID: u.ID, Role: role}, u
 	}
-	creator, _ := createActor("creator", 300)
+	creator, creatorUser := createActor("creator", 300)
 	other, _ := createActor("other", 300)
-	viewer, vu := createActor("viewer", 200)
+	if _, e := s.CreateAccount(a, req.Account{Username: "viewer_rejected", Password: "Integration@2026", Role: 200}); e == nil {
+		t.Fatal("backoffice created a viewer account")
+	}
+	// Future H5 identities are independent of backend account provisioning.
+	vu := system.SysUser{UUID: uuid.New(), Username: "it_h5_" + time.Now().Format("150405.000000"), Password: utils.BcryptHash("Integration@2026"), NickName: "H5 transaction viewer", AuthorityId: 200, Enable: 1}
+	if e := tx.Create(&vu).Error; e != nil {
+		t.Fatal(e)
+	}
+	viewer := service.Actor{ID: vu.ID, Role: 200}
+	for _, key := range []string{"history", "favorites", "orders", "ads"} {
+		if _, err := s.Save(a, key, 0, payload(map[string]any{})); err == nil {
+			t.Fatalf("admin wrote viewer activity: %s", key)
+		}
+	}
+	if _, e := (&systemService.UserService{}).Login(&system.SysUser{Username: vu.Username, Password: "Integration@2026"}); e == nil {
+		t.Fatal("H5 viewer logged into backoffice")
+	}
 	reviewer, _ := createActor("reviewer", 888)
 	save := func(actor service.Actor, key string, id uint, m map[string]any) any {
 		v, e := s.Save(actor, key, id, payload(m))
@@ -200,12 +219,33 @@ func TestPlatformPostgreSQLWorkflow(t *testing.T) {
 			t.Fatalf("%s %s: code %d %s", method, path, out.Code, out.Msg)
 		}
 	}
+	httpCheck(http.MethodGet, "/dramas/records/dramas", "", false)
+	token, _, e = utils.LoginToken(&creatorUser)
+	if e != nil {
+		t.Fatal(e)
+	}
 	httpCheck(http.MethodGet, "/dramas/records/dramas", "", true)
 	httpCheck(http.MethodGet, "/dramas/accounts", "", false)
-	tx.Model(&system.SysUser{}).Where("id=?", viewer.ID).Update("enable", 2)
+	tx.Model(&system.SysUser{}).Where("id=?", creator.ID).Update("enable", 2)
 	httpCheck(http.MethodGet, "/dramas/records/orders", "", false)
-	tx.Model(&system.SysUser{}).Where("id=?", viewer.ID).Update("enable", 1)
+	tx.Model(&system.SysUser{}).Where("id=?", creator.ID).Update("enable", 1)
+	token, _, e = utils.LoginToken(&vu)
+	if e != nil {
+		t.Fatal(e)
+	}
 	httpCheck(http.MethodPost, "/dramas/records/dramas", `{"title":"越权","totalEpisodes":1}`, false)
+	// Router rejects old viewer JWTs even if upstream Casbin rules were stale.
+	isolated := gin.New()
+	router.RouterGroupApp.PlatformRouter.Init(isolated.Group("", middleware.JWTAuth()))
+	oldEngine := engine
+	engine = isolated
+	httpCheck(http.MethodGet, "/dramas/schema", "", false)
+	engine = oldEngine
+	token, _, e = utils.LoginToken(&admin)
+	if e != nil {
+		t.Fatal(e)
+	}
+	httpCheck(http.MethodGet, "/dramas/accounts", "", true)
 	csv := "externalId,platform,dramaId,period,currency,grossMinor,feeMinor\nit-01,web," + strings.TrimSpace(jsonNumber(d.ID)) + ",2026-10,CNY,1000,100\n"
 	if _, e := s.ImportBills(a, strings.NewReader(csv)); e != nil {
 		t.Fatal(e)
@@ -280,5 +320,47 @@ func TestPlatformPostgreSQLWorkflow(t *testing.T) {
 	}
 
 	t.Log("PASS: content workflow, actor isolation, paid URL protection, price integrity, dual approval, idempotency, fulfillment, refund revocation, timed policy, telemetry, JWT/Casbin HTTP, CSV import, membership renewal, verified ad reward, settlement, database references and automatic license expiry; all records rolled back")
+	legacyRole := system.SysAuthority{AuthorityId: 200, AuthorityName: "观众", DefaultRouter: "GDDiscover"}
+	if e := tx.Where("authority_id = ?", 200).FirstOrCreate(&legacyRole).Error; e != nil {
+		t.Fatal(e)
+	}
+	legacyMenu := system.SysBaseMenu{Name: "GDDiscover", Path: "GDDiscover", Component: "plugin/dramas/view/workspace.vue"}
+	if e := tx.Where("name = ?", legacyMenu.Name).FirstOrCreate(&legacyMenu).Error; e != nil {
+		t.Fatal(e)
+	}
+	if e := tx.Model(&legacyRole).Association("SysBaseMenus").Append(&legacyMenu); e != nil {
+		t.Fatal(e)
+	}
+	if e := tx.Model(&vu).Association("Authorities").Append(&legacyRole); e != nil {
+		t.Fatal(e)
+	}
+	if e := tx.Exec("INSERT INTO casbin_rule (ptype,v0,v1,v2) VALUES ('p','200','/dramas/schema','GET') ON CONFLICT DO NOTHING").Error; e != nil {
+		t.Fatal(e)
+	}
+	var ordersBefore int64
+	tx.Model(&model.Orders{}).Count(&ordersBefore)
+	for i := 0; i < 2; i++ {
+		if e := dramaInit.RetireViewerBackend(tx); e != nil {
+			t.Fatal(e)
+		}
+	}
+	for _, query := range []string{
+		"SELECT count(*) FROM sys_authorities WHERE authority_id=200",
+		"SELECT count(*) FROM sys_base_menus WHERE name='GDDiscover'",
+		"SELECT count(*) FROM sys_user_authority WHERE sys_authority_authority_id=200",
+		"SELECT count(*) FROM casbin_rule WHERE v0='200'",
+	} {
+		var n int64
+		if e := tx.Raw(query).Scan(&n).Error; e != nil || n != 0 {
+			t.Fatalf("viewer backend migration: count=%d err=%v", n, e)
+		}
+	}
+	var ordersAfter, usersAfter int64
+	tx.Model(&model.Orders{}).Count(&ordersAfter)
+	tx.Model(&system.SysUser{}).Where("id=?", viewer.ID).Count(&usersAfter)
+	if ordersBefore != ordersAfter || usersAfter != 1 {
+		t.Fatal("retiring viewer backend deleted H5 business data")
+	}
+
 }
 func jsonNumber(n uint) string { b, _ := json.Marshal(n); return string(b) }

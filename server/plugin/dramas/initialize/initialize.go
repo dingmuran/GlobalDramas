@@ -21,7 +21,6 @@ var pages = []struct {
 	Name, Title string
 	Role        uint
 }{
-	{"GDDiscover", "发现好剧", 200}, {"GDHistory", "追剧记录", 200}, {"GDFavorites", "我的收藏", 200}, {"GDWallet", "钱包和订单", 200}, {"GDViewerMember", "会员中心", 200}, {"GDViewerFeedback", "帮助与反馈", 200},
 	{"GDStudio", "工作台", 300}, {"GDDramas", "剧集管理", 300}, {"GDAnalytics", "数据分析", 300}, {"GDEarnings", "收益中心", 300}, {"GDLicenses", "版权与授权", 300},
 	{"GDOverview", "管理总览", 888}, {"GDReviews", "内容审核", 888}, {"GDUsers", "用户与机构", 888}, {"GDFinance", "平台财务", 888}, {"GDPolicies", "策略配置", 888}, {"GDMembership", "会员管理", 888}, {"GDOrders", "订单与售后", 888}, {"GDAds", "广告与补偿", 888}, {"GDData", "平台数据", 888}, {"GDGovernance", "审批审计与告警", 888},
 }
@@ -69,16 +68,19 @@ func Register(engine *gin.Engine) error {
 	}
 	apis := []system.SysApi{}
 	for _, p := range []struct{ Path, Method, Title string }{
-		{"/dramas/schema", "GET", "资源元数据"}, {"/dramas/overview", "GET", "业务概览"}, {"/dramas/records/:resource", "GET", "业务列表"}, {"/dramas/records/:resource", "POST", "业务创建"}, {"/dramas/records/:resource/:id", "PUT", "业务编辑"}, {"/dramas/records/:resource/:id", "DELETE", "草稿删除"}, {"/dramas/actions/:resource/:id", "POST", "业务状态操作"}, {"/dramas/playback/:id", "GET", "播放权益"}, {"/dramas/events", "POST", "播放指标"}, {"/dramas/preview", "GET", "策略影响预览"}, {"/dramas/accounts", "GET", "账号管理"}, {"/dramas/accounts", "POST", "创建业务账号"}, {"/dramas/bills/import", "POST", "账单导入"},
+		{"/dramas/schema", "GET", "资源元数据"}, {"/dramas/overview", "GET", "业务概览"}, {"/dramas/records/:resource", "GET", "业务列表"}, {"/dramas/records/:resource", "POST", "业务创建"}, {"/dramas/records/:resource/:id", "PUT", "业务编辑"}, {"/dramas/records/:resource/:id", "DELETE", "草稿删除"}, {"/dramas/actions/:resource/:id", "POST", "业务状态操作"}, {"/dramas/preview", "GET", "策略影响预览"}, {"/dramas/accounts", "GET", "账号管理"}, {"/dramas/accounts", "POST", "创建业务账号"}, {"/dramas/bills/import", "POST", "账单导入"},
 	} {
 		apis = append(apis, system.SysApi{Path: p.Path, Method: p.Method, ApiGroup: "Global Dramas", Description: p.Title})
 	}
 	pluginutil.RegisterApis(apis...)
 	err := global.GVA_DB.Transaction(func(tx *gorm.DB) error {
+		if err := RetireViewerBackend(tx); err != nil {
+			return err
+		}
 		for _, role := range []struct {
 			ID           uint
 			Name, Router string
-		}{{200, "观众", "GDDiscover"}, {300, "版权方 / 制片方", "GDStudio"}, {888, "超级管理员", "GDOverview"}} {
+		}{{300, "版权方 / 制片方", "GDStudio"}, {888, "超级管理员", "GDOverview"}} {
 			a := system.SysAuthority{AuthorityId: role.ID, AuthorityName: role.Name, DefaultRouter: role.Router}
 			if e := tx.Where("authority_id = ?", role.ID).FirstOrCreate(&a).Error; e != nil {
 				return e
