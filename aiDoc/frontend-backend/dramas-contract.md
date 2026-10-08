@@ -1,6 +1,6 @@
 # Global Dramas 业务接口契约
 
-入口：`server/plugin/dramas` → initialize → router → api → service → model；前端 `web/src/plugin/dramas/api/platform.js`、`view/workspace.vue`。
+入口：`server/plugin/dramas` → initialize → router → api → service → model；前端 `webAdmin/src/plugin/dramas/api/platform.js`、`view/workspace.vue`。
 
 所有后台接口均使用现有 JWT + Casbin。后台角色：300 版权方/制片方、888 超级管理员。200仅为保留服务中的H5观众身份标记，不注册后台角色、菜单或API权限，不能登录后台。除登录与现有验证码接口，不新增匿名接口。
 

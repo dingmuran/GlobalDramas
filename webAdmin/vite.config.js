@@ -80,7 +80,7 @@ export default ({ mode }) => {
       vueDevTools({ launchEditor: env.VITE_EDITOR }),
       vuePlugin(),
       svgBuilder(['./src/plugin/', './src/assets/icons/'], base, outDir, 'assets', mode),
-      [Banner(`\n Build based on gin-vue-admin \n Time : ${timestamp}`)],
+      [Banner(`\n Gload Dramas backoffice; based on gin-vue-admin \n Time : ${timestamp}`)],
       VueFilePathPlugin('./src/pathInfo.json'),
       UnoCSS(),
       vueRootValidator()

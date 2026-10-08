@@ -1,5 +1,5 @@
-/web/node_modules
-/web/dist
+**/node_modules/
+**/dist/
 
 .DS_Store
 
@@ -45,3 +45,11 @@ worktrees/
 
 # Private local Compose project overrides
 .env
+
+# Future Next.js build/cache outputs
+**/.next/
+**/out/
+*.tsbuildinfo
+# Keep reproducible npm dependency locks
+!web/package-lock.json
+!webAdmin/package-lock.json

@@ -1,4 +1,4 @@
-# Global Dramas Admin 本地 Docker 开发环境
+# Gload Dramas 本地 Docker 开发环境
 
 首次克隆先运行 `python3 deploy/init-local-config.py`，生成私密配置；启动后打开 `http://localhost:8080/#/init` 完成首次初始化。已初始化环境不要覆盖配置。
 
@@ -8,7 +8,9 @@
 docker compose -f compose.local.yaml up -d
 ```
 
-前端：http://localhost:8080
+后台管理（webAdmin）：http://localhost:8080
+
+H5 前台基础工程（web）：http://localhost:8081
 
 后端：http://localhost:8888
 
@@ -20,7 +22,9 @@ Go 和 Node.js 均在容器中运行，依赖使用 Docker 卷缓存。前端通
 docker compose -f compose.local.yaml logs -f
 ```
 
-数据库使用 Docker 中的 PostgreSQL 17，数据持久化到 Docker 项目对应的 `pg-data` 卷（新环境默认为 `global-dramas-admin_pg-data`；现有环境通过忽略提交的 `.env` 保留 `unitok-gva_pg-data`）。后端使用 `pgsql` 数据库类型，连接 Docker 服务 `postgres:5432`。本机数据库端口为 `127.0.0.1:15432`，数据库名为 `global_dramas_admin`。数据库账号及密码保存在忽略提交的 `.env.local`，后端配置保存在 `server/config.local.yaml`。
+数据库使用 Docker 中的 PostgreSQL 17，数据持久化到 Docker 项目对应的 `pg-data` 卷（新环境默认为 `gload-dramas_pg-data`；现有环境通过忽略提交的 `.env` 保留 `unitok-gva_pg-data`）。后端使用 `pgsql` 数据库类型，连接 Docker 服务 `postgres:5432`。本机数据库端口为 `127.0.0.1:15432`，数据库名为 `global_dramas_admin`。数据库账号及密码保存在忽略提交的 `.env.local`，后端配置保存在 `server/config.local.yaml`。
+
+前后台分别使用依赖卷 `web-modules` 和 `frontend-modules`，避免Vue和React依赖混用。Go代码生成的前端目录已改为 `webAdmin/src`。前台当前只检查公开健康接口，没有接入后台登录；观众认证与业务页面待后续实现。
 
 初始化只创建 `admin` 超级管理员及系统必需的接口、权限、菜单和字典，不创建测试账号、测试角色或示例图片。仪表盘显示业务数据空状态。旧 SQLite 数据库与配置备份位于 `server/uploads/backups/`。
 

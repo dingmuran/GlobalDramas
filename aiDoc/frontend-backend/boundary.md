@@ -19,8 +19,8 @@
 
 - 涉及破坏性接口调整时，要先写清楚变更范围
 - Swagger 或其他接口说明必须与真实实现一致
-- 前端接口封装应继续放在 `web/src/api/` 或 `web/src/plugin/<name>/api/`
-- 可复用逻辑优先复用 `web/src/utils/` 现有能力
+- 前端接口封装应继续放在 `webAdmin/src/api/` 或 `webAdmin/src/plugin/<name>/api/`
+- 可复用逻辑优先复用 `webAdmin/src/utils/` 现有能力
 
 ## 完成前检查
 

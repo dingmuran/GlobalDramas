@@ -2,6 +2,8 @@
 
 ## 基础约束
 
+本文件现有Vue约束仅适用于 `webAdmin/`。`web/`使用React + Vite + TypeScript，不使用Pinia、Element Plus或Vue插件。两端共用 `packages/contracts/` 数据类型，分别管理路由、请求封装和认证。后台Next.js迁移目前仅规划。
+
 - HTTP 请求统一走 `@/utils/request.js`
 - 全局状态统一使用 Pinia
 - 路由要带完整的元信息并考虑权限

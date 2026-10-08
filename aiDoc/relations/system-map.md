@@ -3,7 +3,9 @@
 ## 根目录职责
 
 - `server/`: 后端代码，包含路由、API、Service、Model、初始化和插件
-- `web/`: 前端代码，包含页面、路由、状态、接口封装、工具函数和插件
+- `webAdmin/`: 现有Vue管理后台，包含页面、路由、状态、接口封装和插件
+- `web/`: React + Vite + TypeScript观众H5基础工程，业务页面尚未实现
+- `packages/contracts/`: 框架无关的共享接口类型，与Go业务模型保持一致
 - `compose.local.yaml`: 当前Docker前后端与PostgreSQL运行入口
 - `deploy/`: 本地私密配置初始化脚本；旧MySQL与Kubernetes部署模板已清理
 - `docs/`: 面向项目的人类文档与设计记录
@@ -22,7 +24,7 @@
 
 ## 前端关系
 
-前端一般遵循以下流向：
+现有Vue后台一般遵循以下流向（路径均相对于 `webAdmin/`）：
 
 1. `src/api/` 或 `src/plugin/<name>/api/` 负责接口调用
 2. `src/pinia/` 负责共享状态
@@ -30,11 +32,13 @@
 4. `src/view/` 或 `src/plugin/<name>/view/` 负责页面
 5. `src/utils/` 负责可复用工具函数
 
+React前台使用独立请求封装，当前只调用公共健康检查。后续观众认证、播放与订单接口需要独立设计权限边界，不复用管理员登录。Next.js后台迁移目前仅规划。
+
 ## 插件对称关系
 
 如果某个能力以插件方式存在，尽量保持前后端结构对称：
 
 - 后端：`server/plugin/<name>/`
-- 前端：`web/src/plugin/<name>/`
+- 前端：`webAdmin/src/plugin/<name>/`
 
 当某个插件的职责和边界趋于稳定后，再把说明补充到 `aiDoc/modules/`。

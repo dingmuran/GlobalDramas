@@ -1,21 +1,28 @@
-# Global Dramas Admin
+# Gload Dramas
 
-基于 Gin + Vue 3 的短剧管理平台，使用 PostgreSQL，Go 和前端运行在 Docker 中。
+短剧平台项目，后端为 Go + Gin，数据库为 PostgreSQL。现有后台保留 Vue 3，H5 前台基础工程采用 React + Vite + TypeScript，全部运行在 Docker 中。后台 Next.js 迁移目前仅规划，不执行重构。
 
 后台仅支持两类角色：版权方/制片方、超级管理员。观众体验由 TK 小程序的 H5 前台承接。后台包含内容与审核、策略、会员、用户、订单、广告记录、财务、数据分析、审批审计与异常恢复，共15个业务页面、28张业务表，表及333个字段均有中文注释。
+
+## 目录
+
+- `server/`：Go 后端。
+- `webAdmin/`：现有后台管理；后续计划迁移 Next.js + TypeScript。
+- `web/`：React + Vite + TypeScript 观众前台基础工程。
+- `packages/contracts/`：两端共享接口类型，由真实 Go 模型生成。
 
 ## 本地启动
 
 需要 Docker Desktop 和 Python 3，不需要在本机安装 Go。
 
 ```sh
-git clone https://github.com/dingmuran/GlobalDramasAdmin.git
-cd GlobalDramasAdmin
+git clone https://github.com/dingmuran/GlobalDramasAdmin.git GloadDramas
+cd GloadDramas
 python3 deploy/init-local-config.py
 docker compose -f compose.local.yaml up -d
 ```
 
-前端：http://localhost:8080/ 。首次安装打开 http://localhost:8080/#/init ，自定义管理员密码并初始化数据库：
+后台管理：http://localhost:8080/；React H5 基础工程：http://localhost:8081/ 。首次安装打开 http://localhost:8080/#/init ，自定义管理员密码并初始化数据库：
 
 - 类型：pgsql
 - host：postgres；port：5432（容器内部地址）
@@ -42,12 +49,14 @@ docker compose -f compose.local.yaml up -d
 ```sh
 docker compose -f compose.local.yaml exec -T -e GD_INTEGRATION=1 -e GVA_CONFIG=/workspace/server/config.local.yaml server go test ./plugin/dramas/...
 docker compose -f compose.local.yaml exec -T web npm run build
+docker compose -f compose.local.yaml exec -T webAdmin npm run build
+python3 deploy/generate-contracts.py
 ```
 
 集成测试使用事务回滚，不留下演示数据。
 
 ## 来源与许可证
 
-项目由 [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) 二次开发。原许可证与源码声明保留，见 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和 [原项目说明](README.upstream.md)。本仓库新增短剧后台业务模块、PostgreSQL业务结构和 Global Dramas Admin 界面与运行配置。
+项目由 [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) 二次开发。原许可证与源码声明保留，见 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和 [原项目说明](README.upstream.md)。本仓库新增短剧后台业务模块、PostgreSQL业务结构和 Gload Dramas 界面与运行配置。
 
 后台已移除发现、播放器、收藏与购买等观众入口。观众身份、观看记录、收藏、权益、订阅、订单、钱包与反馈的表和业务服务保留，管理员继续查询处理。H5 前台、独立观众认证及前台 API 尚待接入；角色200仅保留为服务中的观众身份标记，不再授予后台权限。

@@ -1,3 +1,4 @@
+/** @template T @typedef {import("@gload-dramas/contracts").ApiResponse<T>} ApiResponse */
 import request from '@/utils/request'
 export const schema = () => request({ url: '/dramas/schema', method: 'get' })
 export const overview = () => request({ url: '/dramas/overview', method: 'get' })

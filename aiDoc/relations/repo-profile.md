@@ -2,9 +2,11 @@
 
 ## 项目定位
 
-`gin-vue-admin` 是一个前后端分离的全栈管理系统框架，强调后台管理能力、权限控制、代码生成、中间件扩展、插件化结构与 Swagger API 文档。
+`Gload Dramas` 是基于gin-vue-admin开发的短剧业务平台，管理后台面向超级管理员和版权方/制片方，观众业务由独立H5前台承载。
 
 ## 前端技术栈
+
+以下Vue技术栈用于 `webAdmin/`。新增 `web/` 使用React + Vite + TypeScript，当前为基础工程；`packages/contracts/` 提供共享接口类型。后台Next.js + TypeScript迁移仅规划，未执行。
 
 - Vue 3
 - Vite

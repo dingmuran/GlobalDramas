@@ -1,7 +1,7 @@
 <template>
   <div class="gd-shell">
     <header class="gd-heading">
-      <div><p class="gd-eyebrow">GLOBAL DRAMAS / {{ roleLabel }}</p><h1>{{ page.title }}</h1><p class="gd-subtitle">{{ page.subtitle }}</p></div>
+      <div><p class="gd-eyebrow">GLOAD DRAMAS / {{ roleLabel }}</p><h1>{{ page.title }}</h1><p class="gd-subtitle">{{ page.subtitle }}</p></div>
       <div class="gd-header-actions"><span class="gd-live"><i /> 实时业务数据</span><el-button :loading="loading" @click="load">刷新</el-button></div>
     </header>
 

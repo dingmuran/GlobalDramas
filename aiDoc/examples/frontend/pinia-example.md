@@ -68,6 +68,6 @@ export const useOrderStore = defineStore('order', () => {
 
 ## 真实参考文件
 
-- `web/src/pinia/modules/user.js`
-- `web/src/pinia/modules/router.js`
-- `web/src/pinia/modules/dictionary.js`
+- `webAdmin/src/pinia/modules/user.js`
+- `webAdmin/src/pinia/modules/router.js`
+- `webAdmin/src/pinia/modules/dictionary.js`

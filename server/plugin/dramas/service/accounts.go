@@ -40,7 +40,7 @@ func (s PlatformService) CreateAccount(a Actor, in req.Account) (any, error) {
 	if in.NickName == "" {
 		in.NickName = in.Username
 	}
-	u := system.SysUser{UUID: uuid.New(), Username: in.Username, Password: utils.BcryptHash(in.Password), NickName: in.NickName, AuthorityId: in.Role, Enable: 1, HeaderImg: "/global-dramas.svg"}
+	u := system.SysUser{UUID: uuid.New(), Username: in.Username, Password: utils.BcryptHash(in.Password), NickName: in.NickName, AuthorityId: in.Role, Enable: 1, HeaderImg: "/gload-dramas.svg"}
 	e := global.GVA_DB.Transaction(func(tx *gorm.DB) error {
 		var n int64
 		if e := tx.Model(&system.SysUser{}).Where("username = ?", in.Username).Count(&n).Error; e != nil {

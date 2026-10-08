@@ -11,4 +11,4 @@
 当 AI 需要新增或改造以下内容时，应先读本目录：
 
 - `server/plugin/<name>/`
-- `web/src/plugin/<name>/`
+- `webAdmin/src/plugin/<name>/`

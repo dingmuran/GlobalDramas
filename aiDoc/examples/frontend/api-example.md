@@ -50,5 +50,5 @@ export const createOrder = (data) => {
 
 ## 真实参考文件
 
-- `web/src/api/user.js`
-- `web/src/plugin/announcement/api/info.js`
+- `webAdmin/src/api/user.js`
+- `webAdmin/src/plugin/announcement/api/info.js`

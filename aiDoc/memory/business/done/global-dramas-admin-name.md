@@ -7,5 +7,5 @@
 - 仓库：`https://github.com/dingmuran/GlobalDramasAdmin`。
 - 验证：Docker 内后端编译、PostgreSQL 业务集成测试和前端生产构建通过。
 - 本地兼容：忽略的 `.env` 保留现有 Compose 项目名与数据库卷；新环境默认名称为 `global-dramas-admin`。真实密码、上传文件、数据库文件和构建产物不提交。
-- 运行位置：`/Users/zhangxinzheng/Downloads/Global Dramas/gin-vue-admin`。
+- 运行位置：`/Users/zhangxinzheng/Downloads/GloadDramas`。
 - 运行方式：Docker Compose，前后端运行时均位于容器。

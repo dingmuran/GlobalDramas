@@ -54,7 +54,7 @@ export const fetchOrderList = (data) => {
 
 ## 真实参考文件
 
-- `web/src/utils/request.js`
-- `web/src/utils/format.js`
-- `web/src/utils/dictionary.js`
-- `web/src/utils/btnAuth.js`
+- `webAdmin/src/utils/request.js`
+- `webAdmin/src/utils/format.js`
+- `webAdmin/src/utils/dictionary.js`
+- `webAdmin/src/utils/btnAuth.js`

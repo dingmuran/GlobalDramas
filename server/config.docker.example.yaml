@@ -6,7 +6,7 @@ aliyun-oss:
     bucket-url: yourBucketUrl
     base-path: yourBasePath
 autocode:
-    web: web/src
+    web: webAdmin/src
     root: /workspace
     server: server
     module: github.com/dingmuran/GlobalDramasAdmin/server

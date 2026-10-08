@@ -30,7 +30,7 @@ server/plugin/order/
 │   └── order.go
 └── plugin.go
 
-web/src/plugin/order/
+webAdmin/src/plugin/order/
 ├── api/
 │   └── order.js
 ├── components/
@@ -67,4 +67,4 @@ web/src/plugin/order/
 - `server/plugin/announcement/initialize/router.go`
 - `server/plugin/announcement/api/enter.go`
 - `server/plugin/announcement/service/enter.go`
-- `web/src/plugin/announcement/api/info.js`
+- `webAdmin/src/plugin/announcement/api/info.js`

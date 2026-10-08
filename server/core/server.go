@@ -34,7 +34,7 @@ func RunServer() {
 	mcpBaseURL := mcpTool.ResolveMCPServiceURL()
 
 	fmt.Printf(`
-	欢迎使用 Global Dramas Admin
+	欢迎使用 Gload Dramas
 	当前版本:%s
 	项目地址:https://github.com/dingmuran/GlobalDramasAdmin
 	默认自动化文档地址:http://127.0.0.1%s/swagger/index.html

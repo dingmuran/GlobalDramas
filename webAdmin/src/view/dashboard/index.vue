@@ -9,7 +9,7 @@
           <div>
             <p class="text-xs tracking-[0.2em] text-slate-500 dark:text-slate-400">DASHBOARD</p>
             <h1 class="mt-2 text-xl font-semibold text-slate-900 dark:text-slate-100 lg:text-2xl">
-              欢迎使用 Global Dramas Admin
+              欢迎使用 Gload Dramas
             </h1>
             <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">
               {{ today }} · 查看系统数据和常用管理入口

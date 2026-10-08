@@ -1,4 +1,4 @@
-# Global Dramas Admin 操作说明
+# Gload Dramas 后台操作说明
 
 运行入口：http://localhost:8080/ 。项目、Go编译、前端服务与PostgreSQL均沿用 `compose.local.yaml`；本地无需安装Go。
 
@@ -48,7 +48,7 @@ externalId,platform,dramaId,period,currency,grossMinor,feeMinor
 ## 代码与数据库
 
 - 后端：`server/plugin/dramas/`（Router → API → Service → Model）。
-- 前端：`web/src/plugin/dramas/`。
+- 前端：`webAdmin/src/plugin/dramas/`。
 - 28张表、333字段的中文数据字典：`DRAMAS-DATABASE.md`。
 - PostgreSQL建表、注释、索引与引用保护：`DRAMAS-SCHEMA.sql`；运行时插件会自动迁移，不必手动导入。
 - 接口契约：`aiDoc/frontend-backend/dramas-contract.md`。
@@ -57,7 +57,7 @@ externalId,platform,dramaId,period,currency,grossMinor,feeMinor
 
 ```sh
 docker compose -f compose.local.yaml exec -T -e GD_INTEGRATION=1 -e GVA_CONFIG=/workspace/server/config.local.yaml server go test ./plugin/dramas/service -run TestPlatformPostgreSQLWorkflow -v
-docker compose -f compose.local.yaml exec -T web npm run build
+docker compose -f compose.local.yaml exec -T webAdmin npm run build
 ```
 
 ## 上线前的实际接入

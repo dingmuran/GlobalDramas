@@ -6,12 +6,12 @@ import ElementPlus from 'element-plus'
 import { setupVueRootValidator } from 'vite-check-multiple-dom/client';
 
 import 'element-plus/dist/index.css'
-// 引入gin-vue-admin前端初始化相关内容
-import './core/gin-vue-admin'
+// 引入 Gload Dramas 前端初始化
+import './core/gload-dramas'
 // 引入封装的router
 import router from '@/router/index'
 import '@/permission'
-import run from '@/core/gin-vue-admin.js'
+import run from '@/core/gload-dramas.js'
 import auth from '@/directive/auth'
 import clickOutSide from '@/directive/clickOutSide'
 import { store } from '@/pinia'

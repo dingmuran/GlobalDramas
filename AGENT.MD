@@ -25,7 +25,9 @@
 ## 仓库概览
 
 - `server/`: Go + Gin 后端
-- `web/`: Vue 3 + Vite 前端
+- `webAdmin/`: 现有 Vue 3 管理后台，Next.js + TypeScript 迁移目前仅规划
+- `web/`: React + Vite + TypeScript 观众H5前台基础工程
+- `packages/contracts/`: 前后台共享接口类型
 - `deploy/`: 部署资产
 - `docs/`: 项目文档与设计记录
 - `aiDoc/`: AI 协作文档层
@@ -46,13 +48,13 @@
 - 保持统一响应结构：`{ code, data, msg }`
 - 保持统一分页结构：`{ page, pageSize, total, list }`
 - 前后端字段名和数据类型保持一致
-- 优先复用 `web/src/utils/` 里的工具函数
+- 后台优先复用 `webAdmin/src/utils/`；H5使用自己的请求封装，纯接口类型共享在 `packages/contracts/`
 - 涉及跨栈边界变更时，同步更新 `aiDoc/frontend-backend/`
 
 ### 插件与模块
 
 - 后端插件放在 `server/plugin/<name>/`
-- 前端插件放在 `web/src/plugin/<name>/`
+- 现有后台插件放在 `webAdmin/src/plugin/<name>/`；不得向React前台写入Vue代码
 - 稳定的模块职责、入口和边界说明放到 `aiDoc/modules/`
 
 ### 示例文档

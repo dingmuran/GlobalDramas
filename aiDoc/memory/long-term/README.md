@@ -25,3 +25,4 @@
 - 本 README 只负责说明用途，不承担长期记忆正文
 
 - [Git发布偏好：默认只修改本地](git-publishing.md)
+- [前后端技术栈偏好](frontend-stack.md)

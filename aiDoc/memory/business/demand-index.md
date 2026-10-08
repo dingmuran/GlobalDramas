@@ -6,6 +6,12 @@
 
 ## Done
 
+- [发布项目命名与前后台目录调整](done/publish-frontend-split.md)
+
+- [项目命名与前后台目录拆分](done/frontend-directory-split.md)
+
+- [项目目录与入口文件改名](done/project-directory-name.md)
+
 - [中文提交说明与历史修订](done/chinese-git-history.md)
 
 - [清理项目无用文件](done/project-cleanup.md)

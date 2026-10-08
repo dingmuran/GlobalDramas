@@ -13,7 +13,7 @@
 
 当 AI 需要新增或修改以下文件时，应优先阅读本目录：
 
-- `web/src/api/**`
-- `web/src/pinia/**`
-- `web/src/view/**`
-- `web/src/plugin/**`
+- `webAdmin/src/api/**`
+- `webAdmin/src/pinia/**`
+- `webAdmin/src/view/**`
+- `webAdmin/src/plugin/**`

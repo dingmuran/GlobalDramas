@@ -77,5 +77,5 @@ getTableData()
 
 ## 真实参考文件
 
-- `web/src/view/systemTools/apiToken/index.vue`
-- `web/src/view/superAdmin/api/api.vue`
+- `webAdmin/src/view/systemTools/apiToken/index.vue`
+- `webAdmin/src/view/superAdmin/api/api.vue`
