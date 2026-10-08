@@ -1,0 +1,8 @@
+Global Dramas Admin
+
+Derived from gin-vue-admin: https://github.com/flipped-aurora/gin-vue-admin
+Original source copyright and Apache License 2.0 notices are retained.
+
+This distribution adds Global Dramas Admin branding, a three-role drama business plugin,
+PostgreSQL business schemas with Chinese comments, Docker development configuration,
+and project documentation. See README.upstream.md for the original project documentation.

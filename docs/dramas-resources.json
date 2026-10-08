@@ -1,0 +1,1772 @@
+[
+  {
+    "key": "dramas",
+    "title": "剧集",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [
+      888,
+      300
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "title",
+        "label": "剧名",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "synopsis",
+        "label": "剧情简介",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "coverUrl",
+        "label": "封面地址",
+        "type": "url",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "genre",
+        "label": "题材",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "language",
+        "label": "语言",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "region",
+        "label": "地区",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "totalEpisodes",
+        "label": "计划集数",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "organizationId",
+        "label": "机构ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "organizations"
+      },
+      {
+        "key": "licenseStart",
+        "label": "授权开始",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "licenseEnd",
+        "label": "授权截止",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "copyrightProof",
+        "label": "版权证明地址",
+        "type": "url",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "reviewNote",
+        "label": "审核反馈",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "episodes",
+    "title": "单集",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [
+      888,
+      300
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "dramas"
+      },
+      {
+        "key": "number",
+        "label": "集数",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "title",
+        "label": "单集名称",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "videoUrl",
+        "label": "视频地址",
+        "type": "url",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "durationSeconds",
+        "label": "时长（秒）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "priceMinor",
+        "label": "单集价格（最小货币单位）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "currency",
+        "label": "币种",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CNY",
+          "USD",
+          "EUR",
+          "JPY",
+          "GBP"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "processingProgress",
+        "label": "处理进度（%）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "processingError",
+        "label": "处理反馈",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "versions",
+    "title": "内容版本",
+    "read": [
+      888,
+      300
+    ],
+    "write": [
+      888,
+      300
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "dramas"
+      },
+      {
+        "key": "version",
+        "label": "版本号",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "changeNote",
+        "label": "变更说明",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "snapshot",
+        "label": "内容快照（JSON）",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "reviews",
+    "title": "审核记录",
+    "read": [
+      888,
+      300
+    ],
+    "write": [],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "dramas"
+      },
+      {
+        "key": "decision",
+        "label": "审核结论",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "note",
+        "label": "审核反馈",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "reviewerId",
+        "label": "审核人ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "licenses",
+    "title": "授权合同",
+    "read": [
+      888,
+      300
+    ],
+    "write": [
+      888,
+      300
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "dramas"
+      },
+      {
+        "key": "licensor",
+        "label": "授权方",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "territories",
+        "label": "授权地区",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "startsAt",
+        "label": "起始时间",
+        "type": "datetime",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "expiresAt",
+        "label": "到期时间",
+        "type": "datetime",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "documentUrl",
+        "label": "合同地址",
+        "type": "url",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "remindDays",
+        "label": "提前提醒天数",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "policies",
+    "title": "访问策略",
+    "read": [
+      888
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "name",
+        "label": "策略名称",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "dramaId",
+        "label": "覆盖剧集ID（0为全局）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "dramas"
+      },
+      {
+        "key": "freeEpisodes",
+        "label": "免费集数（-1全部免费）",
+        "type": "integer",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "adsEnabled",
+        "label": "广告开关",
+        "type": "boolean",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "memberFree",
+        "label": "会员覆盖",
+        "type": "boolean",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "effectiveAt",
+        "label": "生效时间",
+        "type": "datetime",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "expiresAt",
+        "label": "失效时间",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "plans",
+    "title": "会员套餐",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "name",
+        "label": "套餐名称",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "platform",
+        "label": "平台",
+        "type": "select",
+        "required": true,
+        "options": [
+          "apple",
+          "google",
+          "web"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "platformProductId",
+        "label": "平台商品ID",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "benefits",
+        "label": "权益说明",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "priceMinor",
+        "label": "价格（最小货币单位）",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "currency",
+        "label": "币种",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CNY",
+          "USD",
+          "EUR",
+          "JPY",
+          "GBP"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "durationDays",
+        "label": "有效天数",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "subscriptions",
+    "title": "会员订阅",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "planId",
+        "label": "套餐ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "plans"
+      },
+      {
+        "key": "platform",
+        "label": "会员来源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "providerSubscriptionId",
+        "label": "平台订阅号",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "startsAt",
+        "label": "开始时间",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "expiresAt",
+        "label": "到期时间",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "syncResult",
+        "label": "同步结果",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "syncs",
+    "title": "平台同步记录",
+    "read": [
+      888
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "subscriptionId",
+        "label": "订阅ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "subscriptions"
+      },
+      {
+        "key": "platform",
+        "label": "平台",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "providerReference",
+        "label": "平台查询编号",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "result",
+        "label": "同步结果",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "checkedAt",
+        "label": "同步时间",
+        "type": "datetime",
+        "required": true,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "organizations",
+    "title": "版权方与制片机构",
+    "read": [
+      888,
+      300
+    ],
+    "write": [
+      888
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "accountId",
+        "label": "所属制片方账号ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "name",
+        "label": "机构名称",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "kind",
+        "label": "机构类型",
+        "type": "select",
+        "required": true,
+        "options": [
+          "copyright",
+          "producer",
+          "both"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "contact",
+        "label": "联系人",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "email",
+        "label": "联系邮箱",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "registrationNumber",
+        "label": "登记编号",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "proofUrl",
+        "label": "资质地址",
+        "type": "url",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "profiles",
+    "title": "用户业务档案",
+    "read": [
+      888
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "accountId",
+        "label": "系统账号ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "organizationId",
+        "label": "机构ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "organizations"
+      },
+      {
+        "key": "source",
+        "label": "注册来源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "notes",
+        "label": "备注",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "history",
+    "title": "观看历史",
+    "read": [
+      888,
+      200
+    ],
+    "write": [
+      888,
+      200
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "episodeId",
+        "label": "单集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "episodes"
+      },
+      {
+        "key": "positionSeconds",
+        "label": "播放位置（秒）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "watchedSeconds",
+        "label": "累计观看（秒）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "source",
+        "label": "流量来源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "favorites",
+    "title": "我的收藏",
+    "read": [
+      888,
+      200
+    ],
+    "write": [
+      888,
+      200
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "dramas"
+      }
+    ]
+  },
+  {
+    "key": "entitlements",
+    "title": "单集权益",
+    "read": [
+      888,
+      200
+    ],
+    "write": [],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "episodeId",
+        "label": "单集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "episodes"
+      },
+      {
+        "key": "source",
+        "label": "权益来源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "reference",
+        "label": "来源记录ID",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "expiresAt",
+        "label": "到期时间",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "feedback",
+    "title": "用户反馈",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [
+      888,
+      200
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "category",
+        "label": "反馈类型",
+        "type": "select",
+        "required": true,
+        "options": [
+          "content",
+          "payment",
+          "playback",
+          "ad",
+          "other"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "subject",
+        "label": "反馈主题",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "message",
+        "label": "反馈内容",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "orderId",
+        "label": "关联订单ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "orders"
+      },
+      {
+        "key": "reply",
+        "label": "客服回复",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "wallet",
+    "title": "钱包流水",
+    "read": [
+      888,
+      200
+    ],
+    "write": [],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "amountMinor",
+        "label": "金额（最小货币单位）",
+        "type": "integer",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "currency",
+        "label": "币种",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "direction",
+        "label": "收支方向",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "reference",
+        "label": "关联编号",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "description",
+        "label": "说明",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "orders",
+    "title": "订单",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [
+      888,
+      200
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "kind",
+        "label": "订单类型",
+        "type": "select",
+        "required": true,
+        "options": [
+          "episode",
+          "membership",
+          "renewal"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "episodeId",
+        "label": "单集ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "episodes"
+      },
+      {
+        "key": "planId",
+        "label": "套餐ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "plans"
+      },
+      {
+        "key": "currency",
+        "label": "币种",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "amountMinor",
+        "label": "订单金额（最小货币单位）",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "provider",
+        "label": "支付平台",
+        "type": "select",
+        "required": true,
+        "options": [
+          "apple",
+          "google",
+          "web"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "providerReference",
+        "label": "支付流水",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "fulfillment",
+        "label": "履约状态",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "issueId",
+        "label": "问题反馈ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "feedback"
+      }
+    ]
+  },
+  {
+    "key": "refunds",
+    "title": "退款请求",
+    "read": [
+      888,
+      200
+    ],
+    "write": [
+      888,
+      200
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "orderId",
+        "label": "订单ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "orders"
+      },
+      {
+        "key": "reason",
+        "label": "退款原因",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "amountMinor",
+        "label": "退款金额（最小货币单位）",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "providerReference",
+        "label": "平台退款流水",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "recoveries",
+    "title": "查询与恢复记录",
+    "read": [
+      888,
+      300,
+      200
+    ],
+    "write": [
+      888
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "orderId",
+        "label": "订单ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "orders"
+      },
+      {
+        "key": "providerReference",
+        "label": "平台查询编号",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "result",
+        "label": "查询或恢复结果",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "evidenceUrl",
+        "label": "凭据地址",
+        "type": "url",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "ads",
+    "title": "广告尝试",
+    "read": [
+      888,
+      200
+    ],
+    "write": [
+      888,
+      200
+    ],
+    "scope": "user",
+    "fields": [
+      {
+        "key": "episodeId",
+        "label": "目标单集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "episodes"
+      },
+      {
+        "key": "network",
+        "label": "广告平台",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "placement",
+        "label": "广告位",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "failureCategory",
+        "label": "失败分类",
+        "type": "select",
+        "required": false,
+        "options": [
+          "no_fill",
+          "timeout",
+          "network",
+          "cancelled",
+          "provider_error"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "providerReference",
+        "label": "验证回执",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "completedAt",
+        "label": "完成时间",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "compensations",
+    "title": "客服补偿",
+    "read": [
+      888
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "targetUserId",
+        "label": "补偿用户ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "episodeId",
+        "label": "补偿单集ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "episodes"
+      },
+      {
+        "key": "adId",
+        "label": "关联广告尝试ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "ads"
+      },
+      {
+        "key": "reason",
+        "label": "补偿原因",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "bills",
+    "title": "财务账单",
+    "read": [
+      888,
+      300
+    ],
+    "write": [
+      888
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "externalId",
+        "label": "账单行编号",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "platform",
+        "label": "账单平台",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": "dramas"
+      },
+      {
+        "key": "period",
+        "label": "账期",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "currency",
+        "label": "币种",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CNY",
+          "USD",
+          "EUR",
+          "JPY",
+          "GBP"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "grossMinor",
+        "label": "总收入（最小货币单位）",
+        "type": "integer",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "feeMinor",
+        "label": "费用（最小货币单位）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "netMinor",
+        "label": "净收入（最小货币单位）",
+        "type": "readonly",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "source",
+        "label": "获取来源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "differenceMinor",
+        "label": "差异金额（最小货币单位）",
+        "type": "integer",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "resolution",
+        "label": "差异处理说明",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "settlements",
+    "title": "结算记录",
+    "read": [
+      888,
+      300
+    ],
+    "write": [
+      888
+    ],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "organizationId",
+        "label": "机构ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "organizations"
+      },
+      {
+        "key": "period",
+        "label": "结算账期",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "currency",
+        "label": "币种",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CNY",
+          "USD",
+          "EUR",
+          "JPY",
+          "GBP"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "amountMinor",
+        "label": "结算金额（最小货币单位）",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "bankReference",
+        "label": "到账流水",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "receivedAt",
+        "label": "到账时间",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "note",
+        "label": "结算说明",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "events",
+    "title": "行为与播放质量",
+    "read": [
+      888,
+      300
+    ],
+    "write": [],
+    "scope": "owner",
+    "fields": [
+      {
+        "key": "dramaId",
+        "label": "剧集ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "episodeId",
+        "label": "单集ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "event",
+        "label": "事件类型",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "source",
+        "label": "流量来源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "sessionId",
+        "label": "播放会话",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "startupMs",
+        "label": "首帧时间（毫秒）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "bufferMs",
+        "label": "卡顿时间（毫秒）",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "errorCode",
+        "label": "播放错误码",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "approvals",
+    "title": "敏感操作审批",
+    "read": [
+      888
+    ],
+    "write": [],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "resource",
+        "label": "操作资源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "targetId",
+        "label": "目标记录ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "action",
+        "label": "审批操作",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "reason",
+        "label": "申请说明",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "reviewerId",
+        "label": "审批人ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "decisionNote",
+        "label": "审批意见",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "evidence",
+        "label": "外部流水或凭据",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "audits",
+    "title": "操作审计",
+    "read": [
+      888
+    ],
+    "write": [],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "resource",
+        "label": "操作资源",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "targetId",
+        "label": "记录ID",
+        "type": "number",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "action",
+        "label": "操作名称",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "detail",
+        "label": "变更内容",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "alerts",
+    "title": "异常告警",
+    "read": [
+      888
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "category",
+        "label": "异常类型",
+        "type": "select",
+        "required": true,
+        "options": [
+          "content",
+          "payment",
+          "finance",
+          "playback",
+          "security",
+          "license"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "severity",
+        "label": "严重程度",
+        "type": "select",
+        "required": true,
+        "options": [
+          "info",
+          "warning",
+          "critical"
+        ],
+        "ref": ""
+      },
+      {
+        "key": "subject",
+        "label": "告警标题",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "detail",
+        "label": "告警内容",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "recoveryNote",
+        "label": "恢复说明",
+        "type": "textarea",
+        "required": false,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "resolvedAt",
+        "label": "恢复时间",
+        "type": "datetime",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  },
+  {
+    "key": "restores",
+    "title": "异常恢复记录",
+    "read": [
+      888
+    ],
+    "write": [
+      888
+    ],
+    "scope": "all",
+    "fields": [
+      {
+        "key": "alertId",
+        "label": "告警ID",
+        "type": "number",
+        "required": true,
+        "options": [],
+        "ref": "alerts"
+      },
+      {
+        "key": "operation",
+        "label": "恢复操作",
+        "type": "text",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "result",
+        "label": "恢复结果",
+        "type": "textarea",
+        "required": true,
+        "options": [],
+        "ref": ""
+      },
+      {
+        "key": "evidence",
+        "label": "恢复凭据",
+        "type": "text",
+        "required": false,
+        "options": [],
+        "ref": ""
+      }
+    ]
+  }
+]
