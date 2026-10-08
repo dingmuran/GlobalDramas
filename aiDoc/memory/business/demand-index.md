@@ -6,6 +6,10 @@
 
 ## Done
 
+- [中文提交说明与历史修订](done/chinese-git-history.md)
+
+- [清理项目无用文件](done/project-cleanup.md)
+
 - [后台仅保留运营与版权方角色](done/backoffice-only.md)
 
 - [本地 DBX 连接项目 PostgreSQL](done/dbx-local-connection.md)

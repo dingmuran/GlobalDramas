@@ -13,7 +13,7 @@
 - UnoCSS
 - Vue Router
 - Axios
-- ECharts
+- 业务统计表格与条形图（真实数据，无演示图表）
 - VueUse
 
 ## 后端技术栈

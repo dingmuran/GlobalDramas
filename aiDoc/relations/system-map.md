@@ -4,7 +4,8 @@
 
 - `server/`: 后端代码，包含路由、API、Service、Model、初始化和插件
 - `web/`: 前端代码，包含页面、路由、状态、接口封装、工具函数和插件
-- `deploy/`: Docker、Kubernetes 等部署相关资产
+- `compose.local.yaml`: 当前Docker前后端与PostgreSQL运行入口
+- `deploy/`: 本地私密配置初始化脚本；旧MySQL与Kubernetes部署模板已清理
 - `docs/`: 面向项目的人类文档与设计记录
 - `aiDoc/`: 面向 AI 协作的结构化上下文
 

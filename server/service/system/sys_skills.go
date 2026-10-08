@@ -74,6 +74,9 @@ func (s *SkillsService) List(_ context.Context, tool string) ([]string, error) {
 	}
 	entries, err := os.ReadDir(skillsDir)
 	if err != nil {
+		if os.IsNotExist(err) {
+			return []string{}, nil
+		}
 		return nil, err
 	}
 	var skills []string
@@ -525,9 +528,6 @@ func (s *SkillsService) toolSkillsDir(tool string) (string, error) {
 		root = "."
 	}
 	skillsDir := filepath.Join(root, toolDir, "skills")
-	if err := os.MkdirAll(skillsDir, os.ModePerm); err != nil {
-		return "", err
-	}
 	return skillsDir, nil
 }
 

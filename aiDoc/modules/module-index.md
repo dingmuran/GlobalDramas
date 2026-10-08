@@ -15,7 +15,7 @@
 
 - `system-core`: 项目核心能力，主要分布在 `server/` 与 `web/src/`
 - `plugins`: 插件化能力，分布在 `server/plugin/` 与 `web/src/plugin/`
-- `deploy`: 运行与发布相关能力，位于 `deploy/`
+- `deploy`: 本地配置初始化脚本，位于 `deploy/`；Docker运行入口为 `compose.local.yaml`
 
 ## 已存在的约束文档
 
