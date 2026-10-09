@@ -1,13 +1,13 @@
 # Gload Dramas
 
-短剧平台项目，后端为 Go + Gin，数据库为 PostgreSQL。现有后台保留 Vue 3，H5 前台基础工程采用 React + Vite + TypeScript，全部运行在 Docker 中。后台 Next.js 迁移目前仅规划，不执行重构。
+短剧平台项目，后端为 Go + Gin，数据库为 PostgreSQL。后台采用 Ant Design Pro 官方完整模板（React + TypeScript + Umi Max + Ant Design 6），H5 前台基础工程采用 React + Vite + TypeScript，全部运行在 Docker 中。后台保留官方默认布局和页面风格，真实短剧业务使用Go接口。
 
 后台仅支持两类角色：版权方/制片方、超级管理员。观众体验由 TK 小程序的 H5 前台承接。后台包含内容与审核、策略、会员、用户、订单、广告记录、财务、数据分析、审批审计与异常恢复，共15个业务页面、28张业务表，表及333个字段均有中文注释。
 
 ## 目录
 
 - `server/`：Go 后端。
-- `webAdmin/`：现有后台管理；后续计划迁移 Next.js + TypeScript。
+- `webAdmin/`：Ant Design Pro 官方模板与真实短剧后台业务。
 - `web/`：React + Vite + TypeScript 观众前台基础工程。
 - `packages/contracts/`：两端共享接口类型，由真实 Go 模型生成。
 
@@ -22,13 +22,7 @@ python3 deploy/init-local-config.py
 docker compose -f compose.local.yaml up -d
 ```
 
-后台管理：http://localhost:8080/；React H5 基础工程：http://localhost:8081/ 。首次安装打开 http://localhost:8080/#/init ，自定义管理员密码并初始化数据库：
-
-- 类型：pgsql
-- host：postgres；port：5432（容器内部地址）
-- userName：global_dramas
-- password：本地生成的 `.env.local` 中的 POSTGRES_PASSWORD
-- dbName：global_dramas_admin
+后台管理：http://localhost:8080/；React H5 基础工程：http://localhost:8081/ 。首次安装启动后执行 `python3 deploy/bootstrap-local-database.py`，交互输入管理员密码，通过现有Go初始化接口创建数据库。当前已初始化环境无需执行。
 
 初始化完成后登录 `admin`。本机数据库工具使用 `127.0.0.1:15432`。实际配置、凭据、数据库与上传文件均不提交。
 
@@ -60,3 +54,5 @@ python3 deploy/generate-contracts.py
 项目由 [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin) 二次开发。原许可证与源码声明保留，见 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和 [原项目说明](README.upstream.md)。本仓库新增短剧后台业务模块、PostgreSQL业务结构和 Gload Dramas 界面与运行配置。
 
 后台已移除发现、播放器、收藏与购买等观众入口。观众身份、观看记录、收藏、权益、订阅、订单、钱包与反馈的表和业务服务保留，管理员继续查询处理。H5 前台、独立观众认证及前台 API 尚待接入；角色200仅保留为服务中的观众身份标记，不再授予后台权限。
+
+无关演示菜单与路由已移除，Mock 已关闭。系统管理包含角色、菜单、API、用户、字典、参数、Token、版本、三类日志与素材。导航读取 Go 授权菜单树，支持分组、排序、隐藏及标题配置。详情见 [后台说明](webAdmin/README.md)。

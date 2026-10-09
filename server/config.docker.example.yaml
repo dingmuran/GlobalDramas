@@ -5,12 +5,6 @@ aliyun-oss:
     bucket-name: yourBucketName
     bucket-url: yourBucketUrl
     base-path: yourBasePath
-autocode:
-    web: webAdmin/src
-    root: /workspace
-    server: server
-    module: github.com/dingmuran/GlobalDramasAdmin/server
-    ai-path: ""
 aws-s3:
     bucket: xxxxx-10005608
     region: ap-shanghai
@@ -92,19 +86,6 @@ jwt:
 local:
     path: uploads/file
     store-path: uploads/file
-mcp:
-    name: GVA_MCP
-    version: v1.0.0
-    path: ""
-    addr: 8889
-    base_url: ""
-    upstream_base_url: ""
-    auth_header: ""
-    request_timeout: 0
-    sse_path: ""
-    message_path: ""
-    url_prefix: ""
-    separate: false
 minio:
     endpoint: yourEndpoint
     access-key-id: ""

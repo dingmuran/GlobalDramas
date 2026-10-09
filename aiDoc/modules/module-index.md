@@ -14,7 +14,7 @@
 ## 当前建议的模块分组
 
 - `system-core`: 项目核心能力，主要分布在 `server/` 与 `webAdmin/src/`
-- `plugins`: 插件化能力，分布在 `server/plugin/` 与 `webAdmin/src/plugin/`
+- `plugins`: 插件化能力，分布在 `server/plugin/` 与 `webAdmin/src/pages/`
 - `deploy`: 本地配置初始化脚本，位于 `deploy/`；Docker运行入口为 `compose.local.yaml`
 
 ## 已存在的约束文档

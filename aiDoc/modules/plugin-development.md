@@ -15,13 +15,7 @@
 
 ## 前端插件结构
 
-前端插件推荐保持以下结构：
-
-- `api/`
-- `components/`
-- `view/`
-- `form/`
-- `config.js` 或等价入口文件
+React后台使用 `src/pages/<name>/`、`src/services/` 和 `src/components/`，通过 `config/routes.ts` 注册页面、Umi access控制入口；不再维护Vue插件目录。
 
 ## 插件入口约束
 

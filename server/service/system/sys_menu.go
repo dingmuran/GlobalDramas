@@ -134,6 +134,9 @@ func (menuService *MenuService) getBaseChildrenList(menu *system.SysBaseMenu, tr
 //@return: error
 
 func (menuService *MenuService) AddBaseMenu(menu system.SysBaseMenu) error {
+	if err := ValidateMenuParent(global.GVA_DB, 0, menu.ParentId); err != nil {
+		return err
+	}
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
 		// 检查name是否重复
 		if !errors.Is(tx.Where("name = ?", menu.Name).First(&system.SysBaseMenu{}).Error, gorm.ErrRecordNotFound) {
@@ -158,7 +161,7 @@ func (menuService *MenuService) AddBaseMenu(menu system.SysBaseMenu) error {
 			}
 
 			// 如果父菜单原本是叶子菜单（没有子菜单），现在要变成枝干菜单，需要清空其权限分配
-			if existingChildrenCount == 0 {
+			if existingChildrenCount == 0 && parentMenu.Component != "Layout" {
 				// 检查父菜单是否被其他角色设置为首页
 				var defaultRouterCount int64
 				err := tx.Model(&system.SysAuthority{}).Where("default_router = ?", parentMenu.Name).Count(&defaultRouterCount).Error
@@ -177,8 +180,15 @@ func (menuService *MenuService) AddBaseMenu(menu system.SysBaseMenu) error {
 			}
 		}
 
-		// 创建菜单
-		return tx.Create(&menu).Error
+		// 创建菜单并立即纳入超级管理员菜单，避免必须重启才能看见新分组。
+		if err := tx.Create(&menu).Error; err != nil {
+			return err
+		}
+		var admin system.SysAuthority
+		if err := tx.First(&admin, "authority_id=?", 888).Error; err != nil {
+			return err
+		}
+		return tx.Model(&admin).Association("SysBaseMenus").Append(&menu)
 	})
 }
 

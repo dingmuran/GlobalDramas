@@ -53,10 +53,10 @@ func scoped(db *gorm.DB, r model.Resource, a Actor) *gorm.DB {
 		return db.Where("owner_id = ?", a.ID)
 	}
 	if r.Key == "dramas" {
-		return db.Where("status = 'published' AND license_start <= ? AND license_end > ?", time.Now(), time.Now())
+		return publishedDramas(db, time.Now())
 	}
 	if r.Key == "episodes" {
-		return db.Where("drama_id IN (?)", global.GVA_DB.Model(&model.Dramas{}).Select("id").Where("status = 'published' AND license_start <= ? AND license_end > ?", time.Now(), time.Now()))
+		return db.Where("drama_id IN (?)", publishedDramas(global.GVA_DB, time.Now()).Select("id"))
 	}
 	if r.Key == "plans" {
 		return db.Where("status = 'active'")

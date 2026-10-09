@@ -6,7 +6,7 @@ import (
 	"github.com/dingmuran/GlobalDramasAdmin/server/global"
 	"github.com/dingmuran/GlobalDramasAdmin/server/model/system"
 	"github.com/dingmuran/GlobalDramasAdmin/server/service"
-	astutil "github.com/dingmuran/GlobalDramasAdmin/server/utils/ast"
+	astutil "github.com/dingmuran/GlobalDramasAdmin/server/utils/sourcecode"
 	"github.com/dingmuran/GlobalDramasAdmin/server/utils/stacktrace"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"

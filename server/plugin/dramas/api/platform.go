@@ -31,7 +31,28 @@ func reply(c *gin.Context, v any, e error) {
 // @Security ApiKeyAuth
 // @Success 200 {object} response.Response
 // @Router /dramas/schema [get]
-func (PlatformApi) Schema(c *gin.Context) { response.OkWithData(platform.Schema(actor(c)), c) }
+func (PlatformApi) Schema(c *gin.Context) {
+	a := actor(c)
+	resources := platform.Schema(a)
+	out := []map[string]any{}
+	allowed := func(path, method string) bool {
+		ok, err := utils.GetCasbin().Enforce(strconv.Itoa(int(a.Role)), path, method)
+		return err == nil && ok
+	}
+	for _, r := range resources {
+		key := r["key"].(string)
+		if !allowed("/dramas/records/"+key, "GET") {
+			continue
+		}
+		writable := r["canWrite"].(bool)
+		r["canWrite"] = writable && allowed("/dramas/records/"+key, "POST")
+		r["canEdit"] = writable && allowed("/dramas/records/"+key+"/1", "PUT")
+		r["canDelete"] = writable && allowed("/dramas/records/"+key+"/1", "DELETE")
+		r["canAction"] = allowed("/dramas/actions/"+key+"/1", "POST")
+		out = append(out, r)
+	}
+	response.OkWithData(out, c)
+}
 
 // @Summary 获取当前角色的真实业务概览
 // @Tags GlobalDramas

@@ -7,7 +7,6 @@ import (
 	"github.com/google/uuid"
 	"github.com/gookit/color"
 	"gorm.io/gorm"
-	"path/filepath"
 
 	"github.com/dingmuran/GlobalDramasAdmin/server/config"
 	"github.com/dingmuran/GlobalDramasAdmin/server/global"
@@ -58,7 +57,6 @@ func (h SqliteInitHandler) EnsureDB(ctx context.Context, conf *request.InitDB) (
 	}); err != nil {
 		return ctx, err
 	}
-	global.GVA_CONFIG.AutoCode.Root, _ = filepath.Abs("..")
 	next = context.WithValue(next, "db", db)
 	return next, err
 }

@@ -38,15 +38,16 @@ services:
     image: node:22-bookworm-slim
     working_dir: /workspace/webAdmin
     environment:
-      VITE_BASE_PATH: http://server
-      VITE_DOCKER: "true"
+      API_TARGET: http://server:8888
+      HOST: 0.0.0.0
+      PORT: "8080"
       TZ: Asia/Shanghai
-    command: ["sh", "-c", "npm install --no-audit --no-fund && exec npx vite --host 0.0.0.0 --port 8080 --strictPort --mode development"]
+    command: ["sh", "-c", "npm install --no-audit --no-fund && exec npm run dev"]
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
       - .:/workspace
-      - web-modules:/workspace/webAdmin/node_modules
+      - backoffice-pro-modules:/workspace/webAdmin/node_modules
       - npm-cache:/root/.npm
     depends_on:
       - server
@@ -71,7 +72,7 @@ services:
 volumes:
   go-mod:
   go-build:
-  web-modules:
+  backoffice-pro-modules:
   frontend-modules:
   npm-cache:
   pg-data:

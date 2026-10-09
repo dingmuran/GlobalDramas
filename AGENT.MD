@@ -25,7 +25,7 @@
 ## 仓库概览
 
 - `server/`: Go + Gin 后端
-- `webAdmin/`: 现有 Vue 3 管理后台，Next.js + TypeScript 迁移目前仅规划
+- `webAdmin/`: Ant Design Pro 官方模板：React + TypeScript + Umi Max + Ant Design 6
 - `web/`: React + Vite + TypeScript 观众H5前台基础工程
 - `packages/contracts/`: 前后台共享接口类型
 - `deploy/`: 部署资产
@@ -48,13 +48,13 @@
 - 保持统一响应结构：`{ code, data, msg }`
 - 保持统一分页结构：`{ page, pageSize, total, list }`
 - 前后端字段名和数据类型保持一致
-- 后台优先复用 `webAdmin/src/utils/`；H5使用自己的请求封装，纯接口类型共享在 `packages/contracts/`
+- 后台请求复用 `webAdmin/src/services/api.ts`，会话在 `services/session.ts`；H5使用自己的请求封装，纯接口类型共享在 `packages/contracts/`
 - 涉及跨栈边界变更时，同步更新 `aiDoc/frontend-backend/`
 
 ### 插件与模块
 
 - 后端插件放在 `server/plugin/<name>/`
-- 现有后台插件放在 `webAdmin/src/plugin/<name>/`；不得向React前台写入Vue代码
+- 后台页面在 `webAdmin/src/pages/`，业务组件在 `src/components/`；两个前端均不得新增Vue代码
 - 稳定的模块职责、入口和边界说明放到 `aiDoc/modules/`
 
 ### 示例文档

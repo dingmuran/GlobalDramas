@@ -1,70 +1,79 @@
 {
   "name": "gload-dramas-backoffice",
-  "version": "2.9.2",
+  "version": "1.0.0",
   "private": true,
+  "description": "Gload Dramas 管理后台（Ant Design Pro v6）",
   "scripts": {
-    "dev": "vite --host --mode development",
-    "serve": "vite --host --mode development",
-    "build": "vite build --mode production",
-    "preview": "vite preview --host --mode development"
+    "dev": "max dev",
+    "build": "max build",
+    "postinstall": "max setup",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "vitest run"
   },
-  "type": "module",
+  "browserslist": [
+    "defaults"
+  ],
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.1",
-    "@form-create/designer": "^3.2.6",
-    "@form-create/element-ui": "^3.2.10",
-    "@iconify/vue": "^5.0.0",
-    "@unocss/transformer-directives": "66.7.5",
-    "@vue-office/docx": "^1.6.2",
-    "@vue-office/excel": "^1.7.11",
-    "@vue-office/pdf": "^2.0.2",
-    "@vueuse/core": "^12.8.2",
-    "@vueuse/integrations": "^12.8.2",
-    "@wangeditor/editor": "^5.1.23",
-    "@wangeditor/editor-for-vue": "^5.1.12",
-    "ace-builds": "^1.36.4",
-    "axios": "1.8.2",
-    "chokidar": "^4.0.0",
-    "element-plus": "^2.13.6",
-    "highlight.js": "^11.10.0",
-    "marked": "14.1.1",
-    "marked-highlight": "^2.1.4",
-    "mitt": "^3.0.1",
-    "nprogress": "^0.2.0",
-    "pinia": "^2.2.2",
-    "qs": "^6.13.0",
-    "screenfull": "^6.0.2",
-    "sortablejs": "^1.15.3",
-    "spark-md5": "^3.0.2",
-    "universal-cookie": "^7",
-    "vform3-builds": "^3.0.10",
-    "vite-auto-import-svg": "^2.5.0",
-    "vue": "^3.5.31",
-    "vue-cropper": "^1.1.4",
-    "vue-qr": "^4.0.9",
-    "vue-router": "^4.4.3",
-    "vue3-ace-editor": "^2.2.4",
-    "vue3-sfc-loader": "^0.9.5",
-    "vuedraggable": "^4.1.0",
-    "@gload-dramas/contracts": "file:../packages/contracts"
+    "@ant-design/icons": "^6.3.2",
+    "@ant-design/plots": "^2.6.8",
+    "@ant-design/pro-components": "^3.1.14-2",
+    "@ant-design/x": "^2.9.0",
+    "@ant-design/x-markdown": "^2.9.0",
+    "@ant-design/x-sdk": "^2.9.0",
+    "@gload-dramas/contracts": "file:../packages/contracts",
+    "@tanstack/react-query": "^5.101.2",
+    "antd": "^6.6.0",
+    "antd-style": "^4.1.0",
+    "china-division": "^2.7.0",
+    "clsx": "^2.1.1",
+    "d3": "^7.9.0",
+    "dayjs": "^1.11.21",
+    "highlight.js": "^11.11.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^8.56.0",
-    "@unocss/extractor-svelte": "66.7.5",
-    "@unocss/preset-wind3": "66.7.5",
-    "@unocss/vite": "66.7.5",
-    "@vitejs/plugin-vue": "^6.0.6",
-    "@vue/compiler-sfc": "^3.5.1",
-    "autoprefixer": "^10.4.20",
-    "chalk": "^5.3.0",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.57.0",
-    "eslint-plugin-vue": "^9.19.2",
-    "globals": "^16.3.0",
-    "sass": "^1.78.0",
-    "vite": "^8.0.10",
-    "vite-check-multiple-dom": "0.2.1",
-    "vite-plugin-banner": "^0.8.0",
-    "vite-plugin-vue-devtools": "^8.1.1"
-  }
+    "@biomejs/biome": "^2.5.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.2",
+    "@types/d3": "^7.4.3",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-helmet": "^6.1.11",
+    "@types/topojson-client": "^3.1.5",
+    "@types/topojson-specification": "^1.0.5",
+    "@umijs/max": "^4.7.3",
+    "cross-env": "^10.1.0",
+    "express": "^5.2.1",
+    "happy-dom": "^20.11.2",
+    "mockjs": "^1.1.0",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^7.0.2",
+    "vitest": "4.1.10"
+  },
+  "overrides": {
+    "@umijs/plugins": {
+      "@ant-design/pro-components": "$@ant-design/pro-components",
+      "axios": "^1.19.0"
+    },
+    "@utoo/pack": {
+      "send": "^0.19.0"
+    },
+    "dva-immer": {
+      "immer": "^9.0.6"
+    },
+    "cosmiconfig": {
+      "js-yaml": "^4.3.1"
+    },
+    "postcss": "^8.5.23"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "repository": "https://github.com/dingmuran/GlobalDramasAdmin.git"
 }

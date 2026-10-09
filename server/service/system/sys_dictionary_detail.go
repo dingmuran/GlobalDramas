@@ -20,6 +20,10 @@ type DictionaryDetailService struct{}
 var DictionaryDetailServiceApp = new(DictionaryDetailService)
 
 func (dictionaryDetailService *DictionaryDetailService) CreateSysDictionaryDetail(sysDictionaryDetail system.SysDictionaryDetail) (err error) {
+	// 0 and null both represent a root item in the backoffice form.
+	if sysDictionaryDetail.ParentID != nil && *sysDictionaryDetail.ParentID == 0 {
+		sysDictionaryDetail.ParentID = nil
+	}
 	// 计算层级和路径
 	if sysDictionaryDetail.ParentID != nil {
 		var parent system.SysDictionaryDetail
@@ -70,6 +74,10 @@ func (dictionaryDetailService *DictionaryDetailService) DeleteSysDictionaryDetai
 //@return: err error
 
 func (dictionaryDetailService *DictionaryDetailService) UpdateSysDictionaryDetail(sysDictionaryDetail *system.SysDictionaryDetail) (err error) {
+	// 0 and null both represent a root item in the backoffice form.
+	if sysDictionaryDetail.ParentID != nil && *sysDictionaryDetail.ParentID == 0 {
+		sysDictionaryDetail.ParentID = nil
+	}
 	// 如果更新了父级ID，需要重新计算层级和路径
 	if sysDictionaryDetail.ParentID != nil {
 		var parent system.SysDictionaryDetail
@@ -233,7 +241,7 @@ func (dictionaryDetailService *DictionaryDetailService) GetDictionaryTreeList(di
 		} else {
 			sysDictionaryDetails[i].Disabled = false // 默认不禁用
 		}
-		
+
 		err = dictionaryDetailService.loadChildren(&sysDictionaryDetails[i])
 		if err != nil {
 			return nil, err
@@ -258,7 +266,7 @@ func (dictionaryDetailService *DictionaryDetailService) loadChildren(detail *sys
 		} else {
 			children[i].Disabled = false // 默认不禁用
 		}
-		
+
 		err = dictionaryDetailService.loadChildren(&children[i])
 		if err != nil {
 			return err
@@ -335,7 +343,7 @@ func (dictionaryDetailService *DictionaryDetailService) GetDictionaryTreeListByT
 		} else {
 			sysDictionaryDetails[i].Disabled = false // 默认不禁用
 		}
-		
+
 		err = dictionaryDetailService.loadChildren(&sysDictionaryDetails[i])
 		if err != nil {
 			return nil, err

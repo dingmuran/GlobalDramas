@@ -30,14 +30,9 @@ server/plugin/order/
 │   └── order.go
 └── plugin.go
 
-webAdmin/src/plugin/order/
-├── api/
-│   └── order.js
-├── components/
-├── form/
-├── view/
-│   └── index.vue
-└── config.js
+webAdmin/src/pages/Order/index.tsx
+webAdmin/src/services/order.ts
+webAdmin/src/components/OrderForm.tsx
 ```
 
 ## 推荐实现顺序
@@ -67,4 +62,4 @@ webAdmin/src/plugin/order/
 - `server/plugin/announcement/initialize/router.go`
 - `server/plugin/announcement/api/enter.go`
 - `server/plugin/announcement/service/enter.go`
-- `webAdmin/src/plugin/announcement/api/info.js`
+- `webAdmin/src/services/api.ts`

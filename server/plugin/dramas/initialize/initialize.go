@@ -82,22 +82,20 @@ func Register(engine *gin.Engine) error {
 			Name, Router string
 		}{{300, "版权方 / 制片方", "GDStudio"}, {888, "超级管理员", "GDOverview"}} {
 			a := system.SysAuthority{AuthorityId: role.ID, AuthorityName: role.Name, DefaultRouter: role.Router}
-			if e := tx.Where("authority_id = ?", role.ID).FirstOrCreate(&a).Error; e != nil {
+			result := tx.Where("authority_id = ?", role.ID).FirstOrCreate(&a)
+			if result.Error != nil {
+				return result.Error
+			}
+			newRole := result.RowsAffected > 0
+			if e := tx.Model(&a).Updates(map[string]any{"authority_name": role.Name, "default_router": role.Router, "parent_id": 0}).Error; e != nil {
 				return e
 			}
-			if e := tx.Model(&a).Updates(map[string]any{"authority_name": role.Name, "default_router": role.Router}).Error; e != nil {
-				return e
-			}
-			root := system.SysBaseMenu{Path: "gd" + strconv.Itoa(int(role.ID)), Name: "GDRoot" + strconv.Itoa(int(role.ID)), Component: "view/routerHolder.vue", Sort: int(role.ID) / 100, Meta: system.Meta{Title: role.Name, Icon: "film"}}
-			if e := tx.Where("name = ?", root.Name).FirstOrCreate(&root).Error; e != nil {
-				return e
-			}
-			menus := []system.SysBaseMenu{root}
+			menus := []system.SysBaseMenu{}
 			for i, p := range pages {
 				if p.Role != role.ID {
 					continue
 				}
-				m := system.SysBaseMenu{ParentId: root.ID, Path: p.Name, Name: p.Name, Component: "plugin/dramas/view/workspace.vue", Sort: i, Meta: system.Meta{Title: p.Title, Icon: "film"}}
+				m := system.SysBaseMenu{ParentId: 0, Path: p.Name, Name: p.Name, Component: "pages/Workspace", Sort: i, Meta: system.Meta{Title: p.Title, Icon: "film"}}
 				if e := tx.Where("name = ?", m.Name).FirstOrCreate(&m).Error; e != nil {
 					return e
 				}
@@ -107,12 +105,15 @@ func Register(engine *gin.Engine) error {
 				if e := tx.Model(&a).Association("SysBaseMenus").Append(menus); e != nil {
 					return e
 				}
-			} else {
+			} else if newRole {
 				if e := tx.Model(&a).Association("SysBaseMenus").Replace(menus); e != nil {
 					return e
 				}
 			}
 			for _, api := range apis {
+				if role.ID == 300 && !newRole {
+					continue
+				}
 				if role.ID != 888 && (api.Path == "/dramas/accounts" || api.Path == "/dramas/bills/import" || api.Path == "/dramas/preview") {
 					continue
 				}
@@ -122,7 +123,7 @@ func Register(engine *gin.Engine) error {
 				}
 			}
 			if role.ID != 888 {
-				for _, api := range []system.SysApi{{Path: "/user/getUserInfo", Method: "GET"}, {Path: "/menu/getMenu", Method: "POST"}, {Path: "/user/changePassword", Method: "POST"}, {Path: "/user/setSelfInfo", Method: "PUT"}, {Path: "/user/setSelfSetting", Method: "PUT"}, {Path: "/user/setUserAuthority", Method: "POST"}} {
+				for _, api := range []system.SysApi{{Path: "/jwt/jsonInBlacklist", Method: "POST"}, {Path: "/user/getUserInfo", Method: "GET"}, {Path: "/menu/getMenu", Method: "POST"}, {Path: "/user/changePassword", Method: "POST"}, {Path: "/user/setSelfInfo", Method: "PUT"}, {Path: "/user/setSelfSetting", Method: "PUT"}, {Path: "/user/setUserAuthority", Method: "POST"}} {
 					r := adapter.CasbinRule{Ptype: "p", V0: strconv.Itoa(int(role.ID)), V1: api.Path, V2: api.Method}
 					if e := tx.Where("ptype = ? AND v0 = ? AND v1 = ? AND v2 = ?", r.Ptype, r.V0, r.V1, r.V2).FirstOrCreate(&r).Error; e != nil {
 						return e
@@ -130,7 +131,7 @@ func Register(engine *gin.Engine) error {
 				}
 			}
 		}
-		return nil
+		return ReconcileReactBackoffice(tx)
 	})
 	if err != nil {
 		return err
@@ -149,5 +150,6 @@ func Register(engine *gin.Engine) error {
 	g := engine.Group(global.GVA_CONFIG.System.RouterPrefix)
 	g.Use(middleware.JWTAuth(), middleware.CasbinHandler())
 	router.RouterGroupApp.PlatformRouter.Init(g)
+	router.RouterGroupApp.ViewerRouter.InitPublic(engine.Group(global.GVA_CONFIG.System.RouterPrefix))
 	return nil
 }

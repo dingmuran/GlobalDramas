@@ -2,4 +2,7 @@ package service
 
 var ServiceGroupApp = new(ServiceGroup)
 
-type ServiceGroup struct{ PlatformService }
+type ServiceGroup struct {
+	PlatformService
+	ViewerService
+}

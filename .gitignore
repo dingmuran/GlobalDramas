@@ -53,3 +53,12 @@ worktrees/
 # Keep reproducible npm dependency locks
 !web/package-lock.json
 !webAdmin/package-lock.json
+
+# Umi generated runtime files
+**/.umi/
+**/.umi-production/
+**/.umi-test/
+
+# Local frontend compiler caches and Go integration-test logs
+**/.turbopack/
+/server/plugin/**/log/

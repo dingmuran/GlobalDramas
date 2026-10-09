@@ -19,8 +19,8 @@
 
 - 涉及破坏性接口调整时，要先写清楚变更范围
 - Swagger 或其他接口说明必须与真实实现一致
-- 前端接口封装应继续放在 `webAdmin/src/api/` 或 `webAdmin/src/plugin/<name>/api/`
-- 可复用逻辑优先复用 `webAdmin/src/utils/` 现有能力
+- 前端接口封装应继续放在 `webAdmin/src/services/`
+- 可复用逻辑优先复用 `webAdmin/src/domain/` 和 `services/` 现有能力
 
 ## 完成前检查
 
@@ -33,3 +33,5 @@
 ## Global Dramas 业务接口
 
 三角色业务的具体契约、金额精度、归属规则和外部平台接入边界见 [dramas-contract.md](dramas-contract.md)。
+
+前后台共用 Go 服务、观众接口 `/viewer/v1` 与独立认证边界见 [viewer-api.md](viewer-api.md)。

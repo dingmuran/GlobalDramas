@@ -6,3 +6,8 @@ Original source copyright and Apache License 2.0 notices are retained.
 This distribution adds Gload Dramas branding, a two-role backoffice business plugin,
 PostgreSQL business schemas with Chinese comments, Docker development configuration,
 and project documentation. See README.upstream.md for the original project documentation.
+
+Backoffice template: Ant Design Pro 6.0.3
+https://github.com/ant-design/ant-design-pro
+Source revision: 24de7e34b8f035553cbe82639ee86292df71b14a
+MIT license and original notice retained in webAdmin/LICENSE.ant-design-pro.

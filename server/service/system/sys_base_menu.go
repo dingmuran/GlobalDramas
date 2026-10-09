@@ -69,6 +69,9 @@ func (baseMenuService *BaseMenuService) DeleteBaseMenu(id int) (err error) {
 //@return: err error
 
 func (baseMenuService *BaseMenuService) UpdateBaseMenu(menu system.SysBaseMenu) (err error) {
+	if err = ValidateMenuParent(global.GVA_DB, menu.ID, menu.ParentId); err != nil {
+		return err
+	}
 	var oldMenu system.SysBaseMenu
 	upDateMap := make(map[string]interface{})
 	upDateMap["keep_alive"] = menu.KeepAlive
@@ -125,6 +128,18 @@ func (baseMenuService *BaseMenuService) UpdateBaseMenu(menu system.SysBaseMenu) 
 			}
 		}
 
+		// Moving an authorized child also grants its new ancestors to the same roles.
+		parent := menu.ParentId
+		for parent != 0 {
+			if e := tx.Exec("INSERT INTO sys_authority_menus(sys_authority_authority_id,sys_base_menu_id) SELECT sys_authority_authority_id, CAST(? AS bigint) FROM sys_authority_menus WHERE sys_base_menu_id=? ON CONFLICT DO NOTHING", parent, menu.ID).Error; e != nil {
+				return e
+			}
+			var ancestor system.SysBaseMenu
+			if e := tx.First(&ancestor, parent).Error; e != nil {
+				return e
+			}
+			parent = ancestor.ParentId
+		}
 		txErr = tx.Model(&oldMenu).Updates(upDateMap).Error
 		if txErr != nil {
 			global.GVA_LOG.Debug(txErr.Error())
@@ -144,4 +159,21 @@ func (baseMenuService *BaseMenuService) UpdateBaseMenu(menu system.SysBaseMenu) 
 func (baseMenuService *BaseMenuService) GetBaseMenuById(id int) (menu system.SysBaseMenu, err error) {
 	err = global.GVA_DB.Preload("MenuBtn").Preload("Parameters").Where("id = ?", id).First(&menu).Error
 	return
+}
+
+// ValidateMenuParent rejects dangling parents and cycles before menu tree traversal.
+func ValidateMenuParent(db *gorm.DB, id, parent uint) error {
+	seen := map[uint]bool{}
+	for parent != 0 {
+		if parent == id || seen[parent] {
+			return errors.New("菜单上级不能是自己或自己的子菜单")
+		}
+		seen[parent] = true
+		var row system.SysBaseMenu
+		if err := db.First(&row, parent).Error; err != nil {
+			return errors.New("上级菜单不存在")
+		}
+		parent = row.ParentId
+	}
+	return nil
 }

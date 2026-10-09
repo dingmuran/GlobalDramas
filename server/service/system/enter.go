@@ -7,7 +7,6 @@ type ServiceGroup struct {
 	UserService
 	CasbinService
 	InitDBService
-	AutoCodeService
 	BaseMenuService
 	AuthorityService
 	DictionaryService
@@ -18,12 +17,6 @@ type ServiceGroup struct {
 	SysExportTemplateService
 	SysParamsService
 	SysVersionService
-	SkillsService
-	AIWorkflowSession aiWorkflowSession
-	AutoCodePlugin    autoCodePlugin
-	AutoCodePackage   autoCodePackage
-	AutoCodeHistory   autoCodeHistory
-	AutoCodeTemplate  autoCodeTemplate
 	SysErrorService
 	LoginLogService
 	ApiTokenService

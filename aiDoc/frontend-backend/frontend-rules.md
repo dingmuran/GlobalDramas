@@ -1,37 +1,9 @@
 # 前端约束
 
-## 基础约束
+后台基于Ant Design Pro官方模板，使用React + TypeScript + Umi Max；H5使用React + Vite。不得新增Vue、Pinia或Element Plus代码。
 
-本文件现有Vue约束仅适用于 `webAdmin/`。`web/`使用React + Vite + TypeScript，不使用Pinia、Element Plus或Vue插件。两端共用 `packages/contracts/` 数据类型，分别管理路由、请求封装和认证。后台Next.js迁移目前仅规划。
+后台真实业务请求统一在 `src/services/api.ts`，认证在 `services/session.ts`，请求拦截器在 `app.tsx`。共享类型引用 `@gload-dramas/contracts`。使用React Query进行服务端缓存，账号与角色参与数据查询键；退出时清除缓存。
 
-- HTTP 请求统一走 `@/utils/request.js`
-- 全局状态统一使用 Pinia
-- 路由要带完整的元信息并考虑权限
-- 需要动态路由时，沿用项目现有异步路由处理方式
+保持官方风格，移除无关演示路由并关闭 Mock；不得写入示例金额、趋势或账号。业务与系统管理表格采用 ProTable，表单采用 ProForm，导航读取 Go 授权菜单树，权限按钮使用服务端 schema 能力；后端独立鉴权。
 
-## 命名规范
-
-- 文件名使用 `kebab-case`
-- 组件名使用 `PascalCase`
-- 变量名使用 `camelCase`
-- 常量名使用 `UPPER_SNAKE_CASE`
-
-## 注释规范
-
-- API 封装尽量补全 JSDoc
-- 复杂组件要写清功能说明
-- 关键业务逻辑可以补充必要的行内注释
-
-## 样式规范
-
-- 优先使用 UnoCSS
-- 遵循 Element Plus 现有设计风格
-- 避免内联样式
-- 主题相关能力优先通过 CSS 变量控制
-
-## 性能规范
-
-- 路由优先懒加载
-- 大列表考虑虚拟滚动或等价优化
-- 合理复用缓存
-- 图片上传与展示考虑压缩与加载成本
+金额响应保留字符串，编辑请求为安全整数；日期保留null。使用语义按钮、中文标签、宽表横向滚动和移动端布局。复杂动作确认后调用Go状态接口；财务与审核规则由服务端负责。

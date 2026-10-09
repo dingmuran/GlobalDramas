@@ -6,6 +6,18 @@
 
 ## Done
 
+- [清理测试资产并提交前后台改造](done/publish-backoffice-viewer-boundary.md)
+
+- [共用后端、独立观众接口](done/viewer-api-boundary.md)
+
+- [删除业务页面重复文案](done/remove-workspace-kicker.md)
+
+- [测试账号与接口、头像菜单修复](done/test-accounts-and-interface-audit.md)
+
+- [恢复系统管理与分组导航](done/restore-system-navigation.md)
+
+- [Ant Design Pro 官方后台重构](done/rebuild-ant-design-pro.md)
+
 - [发布项目命名与前后台目录调整](done/publish-frontend-split.md)
 
 - [项目命名与前后台目录拆分](done/frontend-directory-split.md)

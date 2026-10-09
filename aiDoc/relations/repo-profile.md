@@ -1,41 +1,7 @@
 # 项目画像
 
-## 项目定位
+Gload Dramas 短剧平台，后台面向300版权方/制片方与888超级管理员；观众端位于独立H5工程。
 
-`Gload Dramas` 是基于gin-vue-admin开发的短剧业务平台，管理后台面向超级管理员和版权方/制片方，观众业务由独立H5前台承载。
+后台采用 Ant Design Pro 官方6.0.3模板，React19、TypeScript、Umi Max4、Ant Design6、ProComponents3、React Query。保留官方默认布局和页面风格，业务与系统管理使用真实接口与分组导航，无关示例路由移除，Mock 关闭。
 
-## 前端技术栈
-
-以下Vue技术栈用于 `webAdmin/`。新增 `web/` 使用React + Vite + TypeScript，当前为基础工程；`packages/contracts/` 提供共享接口类型。后台Next.js + TypeScript迁移仅规划，未执行。
-
-- Vue 3
-- Vite
-- Pinia
-- Element Plus
-- UnoCSS
-- Vue Router
-- Axios
-- 业务统计表格与条形图（真实数据，无演示图表）
-- VueUse
-
-## 后端技术栈
-
-- Go
-- Gin
-- GORM
-- Casbin
-- Viper
-- Zap
-- Redis
-- JWT
-- 多数据库支持
-- 多云存储支持
-
-## 项目核心特征
-
-- RBAC 权限控制
-- 前后端分离
-- 插件化能力
-- Swagger 文档
-- 统一响应结构
-- 代码生成与后台管理基础设施
+H5采用React + Vite + TypeScript；后端Go、Gin、GORM、Casbin、Viper、Zap、JWT；本地PostgreSQL17与各运行时均在Docker中。保留28张业务表和真实数据、中文字段注释及双人审批。CRUD代码生成器及相关MCP/AI生成代码已删除。

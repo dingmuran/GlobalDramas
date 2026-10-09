@@ -3,10 +3,10 @@ package initialize
 import (
 	"time"
 
-	oracle "github.com/dzwvip/gorm-oracle"
 	"github.com/dingmuran/GlobalDramasAdmin/server/config"
 	"github.com/dingmuran/GlobalDramasAdmin/server/global"
 	"github.com/dingmuran/GlobalDramasAdmin/server/initialize/internal"
+	oracle "github.com/dzwvip/gorm-oracle"
 	"gorm.io/gorm"
 )
 

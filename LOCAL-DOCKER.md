@@ -1,6 +1,6 @@
 # Gload Dramas 本地 Docker 开发环境
 
-首次克隆先运行 `python3 deploy/init-local-config.py`，生成私密配置；启动后打开 `http://localhost:8080/#/init` 完成首次初始化。已初始化环境不要覆盖配置。
+首次克隆先运行 `python3 deploy/init-local-config.py`，生成私密配置；启动后执行 `python3 deploy/bootstrap-local-database.py` 交互完成首次初始化。已初始化环境不要覆盖配置。
 
 在当前项目目录运行：
 
@@ -24,7 +24,7 @@ docker compose -f compose.local.yaml logs -f
 
 数据库使用 Docker 中的 PostgreSQL 17，数据持久化到 Docker 项目对应的 `pg-data` 卷（新环境默认为 `gload-dramas_pg-data`；现有环境通过忽略提交的 `.env` 保留 `unitok-gva_pg-data`）。后端使用 `pgsql` 数据库类型，连接 Docker 服务 `postgres:5432`。本机数据库端口为 `127.0.0.1:15432`，数据库名为 `global_dramas_admin`。数据库账号及密码保存在忽略提交的 `.env.local`，后端配置保存在 `server/config.local.yaml`。
 
-前后台分别使用依赖卷 `web-modules` 和 `frontend-modules`，避免Vue和React依赖混用。Go代码生成的前端目录已改为 `webAdmin/src`。前台当前只检查公开健康接口，没有接入后台登录；观众认证与业务页面待后续实现。
+前后台分别使用依赖卷 `backoffice-pro-modules` 和 `frontend-modules`，后台为Ant Design Pro，前台为React Vite，依赖与构建输出独立。CRUD代码生成器已删除。前台当前只检查公开健康接口，没有接入后台登录；观众认证与业务页面待后续实现。
 
 初始化只创建 `admin` 超级管理员及系统必需的接口、权限、菜单和字典，不创建测试账号、测试角色或示例图片。仪表盘显示业务数据空状态。旧 SQLite 数据库与配置备份位于 `server/uploads/backups/`。
 
