@@ -1,5 +1,9 @@
 # Memory
 
+业务需求索引统一使用 [business/demand-index.md](business/demand-index.md)，新需求写入 `business/active/`，完成后移入 `business/done/`，每条需求独立成文，更新时保留其他历史记录。单条模板位于 `business/TEMPLATE.md`。
+
+长期偏好按主题维护在 `long-term/`，常用入口为 [Git 发布偏好](long-term/git-publishing.md) 和 [前后端技术栈](long-term/frontend-stack.md)。各子目录不再重复维护 README。
+
 `aiDoc/memory/` 是 AI 的记忆层，不是普通笔记堆放区。
 
 这里的记忆分成两类：

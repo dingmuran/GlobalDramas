@@ -6,4 +6,4 @@
 
 修改Go模型后运行 `python3 deploy/generate-contracts.py`，再在前台运行类型检查和构建。类型是开发期契约，不代替服务端权限或请求数据的运行时验证。
 
-现有后台为Vue，尚未迁移Next.js；后台API封装可以使用JSDoc引用这些类型。后续React + Vite及Next.js均可使用本包，分别管理请求地址和认证方式。
+后台为 Ant Design Pro（React + TypeScript + Umi Max），观众前台为 React + Vite + TypeScript。两端分别管理请求地址与认证方式；观众公共目录类型维护在 `viewer.ts`。

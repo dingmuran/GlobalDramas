@@ -1,0 +1,16 @@
+{
+  "name": "Gload Dramas Docker 开发",
+  "dockerComposeFile": "../compose.local.yaml",
+  "service": "webAdmin",
+  "workspaceFolder": "/workspace",
+  "runServices": ["postgres", "server", "web", "webAdmin"],
+  "shutdownAction": "none",
+  "overrideCommand": false,
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "typescript.enablePromptUseWorkspaceTsdk": true
+      }
+    }
+  }
+}

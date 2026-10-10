@@ -48,6 +48,7 @@ services:
     volumes:
       - .:/workspace
       - backoffice-pro-modules:/workspace/webAdmin/node_modules
+      - frontend-modules:/workspace/web/node_modules
       - npm-cache:/root/.npm
     depends_on:
       - server

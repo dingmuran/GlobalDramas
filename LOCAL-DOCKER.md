@@ -16,6 +16,16 @@ H5 前台基础工程（web）：http://localhost:8081
 
 Go 和 Node.js 均在容器中运行，依赖使用 Docker 卷缓存。前端通过 Docker 服务名 `server` 代理后端。
 
+## 容器内编辑与类型识别
+
+前端依赖仅安装在 Docker 卷，本机 node_modules 为空是正常情况。本机编辑器直接打开源码无法读取这些卷，会提示缺少 react/jsx-runtime 或 JSX.IntrinsicElements；这不表示容器缺少依赖。
+
+使用支持 Dev Containers 的编辑器，执行“Dev Containers: Attach to Running Container”，选择当前 webAdmin 容器并打开 `/workspace`。该容器同时挂载前后台依赖卷，支持两个前端的类型识别。连接后若仍显示旧诊断，执行“TypeScript: Restart TS Server”。
+
+也可通过 `.devcontainer/devcontainer.json` 执行“Dev Containers: Reopen in Container”，启动前应完成本地配置初始化。附加已有容器可以沿用当前运行环境。
+
+无需在本机安装 Go 或前端依赖。编辑器不支持容器连接时，可以在 Docker 内运行 typecheck/build，但本机诊断仍无法解析容器依赖。
+
 首次启动需要下载镜像、安装前端依赖并编译后端。查看进度：
 
 ```sh

@@ -62,3 +62,6 @@ worktrees/
 # Local frontend compiler caches and Go integration-test logs
 **/.turbopack/
 /server/plugin/**/log/
+
+# Original imported artwork; web serves optimized copies.
+/.cache/source-posters/
