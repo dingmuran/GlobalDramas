@@ -18,7 +18,7 @@ React + Vite + TypeScript + Tailwind CSS v4 + shadcn/ui（Radix Nova），PC 和
 
 `/api/viewer/v1` 已代理同一个 Go 服务的观众接口，接口类型在 `../packages/contracts/src`；Demo 本机状态不等于生产账号和权益。独立浏览器使用原生 video，识别到 TTMinis 时显示平台播放器待接入；正式 Mini Drama 须接 VePlayer、平台审核媒资、观众认证和付款/权益服务。
 
-观众 Web 静态演示已部署至 http://huanqiucs.com，当前仅使用 HTTP。未部署后台与数据库，未提交 TikTok 审核、未开通真实支付。后续代码更新仅提交 Git，不自动发布服务器。
+观众 Web 静态演示已部署至 https://huanqiucs.com，当前已启用 HTTPS 与免费证书自动续期。未部署后台与数据库，未提交 TikTok 审核、未开通真实支付。后续代码更新仅提交 Git，不自动发布服务器。
 
 ## UI 维护
 

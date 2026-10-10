@@ -33,3 +33,5 @@
 模块说明要聚焦职责和边界，不要堆砌实现细节。
 
 - [Global Dramas 三角色业务模块](dramas-platform.md)
+
+- [React Native / Expo App 骨架](mobile-app.md)

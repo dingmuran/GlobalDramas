@@ -4,6 +4,8 @@ import settings from './defaultSettings';
 import routes from './routes';
 export default defineConfig({
   title: 'Gload Dramas',
+  favicons: ['/favicon.png'],
+  links: [{ rel: 'apple-touch-icon', href: '/icons/apple-touch-icon.png' }],
   hash: true,
   history: { type: 'hash' },
   routes,

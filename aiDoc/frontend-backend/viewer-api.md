@@ -32,3 +32,7 @@
 ## 验证
 
 PostgreSQL 事务测试覆盖内容可见性、私有字段隔离、参数校验和拒绝公开写操作，结束后回滚数据；前台生产构建及原有管理业务集成测试通过。
+
+## 原生 App 预留
+
+`mobile/` 使用同一公开观众目录与共享 contracts，封装入口为 `mobile/src/services/viewer.ts`。API 根地址由 `EXPO_PUBLIC_API_BASE_URL` 提供，直接调用 `/viewer/v1`；不依赖 Web 的 Vite 代理。当前页面为离线骨架，尚未接通观众身份、播放授权或个人数据。

@@ -12,7 +12,7 @@ const Settings = {
   fixSiderbar: true,
   colorWeak: false,
   title: 'Gload Dramas',
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: '/brand-logo-tiktok-1024.png',
   iconfontUrl: '',
   token: {
     // 参见ts声明，demo 见文档，通过token 修改样式

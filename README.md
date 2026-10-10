@@ -2,7 +2,7 @@
 
 **面向全球观众的短剧平台，包含 Gload Dramas Web/H5 前台、内容管理后台和 Go 业务服务。**
 
-[在线体验](http://huanqiucs.com) · [本地开发](LOCAL-DOCKER.md) · [业务指南](docs/GLOBAL-DRAMAS-GUIDE.md) · [前台说明](web/README.md) · [后台说明](webAdmin/README.md)
+[在线体验](https://huanqiucs.com) · [本地开发](LOCAL-DOCKER.md) · [业务指南](docs/GLOBAL-DRAMAS-GUIDE.md) · [前台说明](web/README.md) · [后台说明](webAdmin/README.md) · [App 骨架](mobile/README.md)
 
 ![Gload Dramas 首页](docs/screenshots/shadcn-desktop-home.png)
 
@@ -11,6 +11,7 @@
 | 应用 | 技术栈 | 用途 |
 | --- | --- | --- |
 | Web / H5 | React、TypeScript、Vite、Tailwind CSS、shadcn/ui | 发现短剧、搜索、播放、选集与个人片单 |
+| App 骨架 | React Native、Expo、TypeScript、Expo Router | iOS / Android 基础导航，后续开发入口 |
 | 管理后台 | Ant Design Pro、Umi Max、Ant Design 6 | 内容审核、运营配置、用户订单与财务管理 |
 | 业务服务 | Go、Gin、GORM、JWT、Casbin | 后台业务接口、权限与观众接口基础 |
 | 数据库 | PostgreSQL | 业务数据、审核记录与审计 |
@@ -34,13 +35,14 @@
 
 | 范围 | 当前状态 |
 | --- | --- |
+| 原生 App | 仅基础页面、导航与接口封装；正式功能尚未开发 |
 | 观众前台 | 可交互的演示体验，使用导入的剧名、海报与集数 |
 | 热播榜单、分类与简介 | 演示排序及编辑数据，尚未接入真实热度统计 |
 | 视频播放 | 所有选集共用公开授权的 Sintel 预告样片 |
 | 喜欢、收藏、观看进度与演示解锁 | 保存在当前浏览器，不同步到业务数据库 |
 | TikTok 登录、支付、正式剧集媒资 | 尚未接入，演示交互不代表实际账号或购买权益 |
 | 管理后台 | 使用真实业务接口与 PostgreSQL；外部渠道能力仍需要对应平台配置 |
-| 公网演示 | 仅部署 Web 静态资源，当前使用 HTTP；未部署后台或数据库 |
+| 公网演示 | 仅部署 Web 静态资源，两个域名已启用 HTTPS 与证书自动续期；未部署后台或数据库 |
 
 前台演示数据与后台真实业务数据是两套独立来源。正式业务接入需完成观众认证、媒资、权益和支付联调。
 
@@ -76,6 +78,7 @@ python3 deploy/bootstrap-local-database.py
 
 ```text
 web/                 观众 Web / H5
+mobile/              React Native / Expo App 骨架
 webAdmin/            管理后台
 server/              Go 业务服务
 packages/contracts/  共享接口类型

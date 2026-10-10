@@ -8,6 +8,8 @@
 
 ## Done
 
+- [TikTok 上传 Logo、Web 简介及政策链接](done/tiktok-submission-logo-and-links.md)
+
 - [玻璃导航、明暗主题与热门搜索](done/viewer-glass-theme-search.md)
 
 - [shadcn/ui 前台设计改造](done/viewer-shadcn-redesign.md)
@@ -109,3 +111,9 @@
 - [首页热播榜单与 H5 登录弹窗优化](done/viewer-trending-ranking-login-mobile.md)（用户数字素材、桌面翻页、H5滑动与紧凑登录）
 
 - [仓库改名与介绍更新](done/repository-globaldramas-rename.md)（GlobalDramas、GitHub About、README）
+
+- [React Native App 骨架](done/mobile-app-scaffold.md)（复核通过；业务页面后续开发；已授权本地 Git 提交）
+
+- [双域名免费 HTTPS 与自动续期](done/viewer-web-https-enable.md)
+
+- [Web 与 WebAdmin 品牌图标统一](done/web-admin-brand-logo-refresh.md)（保留原 TikTok 登录弹窗；仅本地修改，不提交、不部署）

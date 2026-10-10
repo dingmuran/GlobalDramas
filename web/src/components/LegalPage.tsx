@@ -11,7 +11,7 @@ export default function LegalPage({ page, language, onLanguage }: { page: 'terms
     <div className="legal-page">
       <header className="legal-toolbar">
         <div className="legal-toolbar-inner">
-          <a className="legal-back" href="/" aria-label={en ? 'Back to Gload Dramas' : '返回 Gload Dramas'}><span><ArrowLeft aria-hidden="true" /></span><img className="legal-brand-logo" src="/media/ui/brand-logo.png" alt="" /><strong>Gload Dramas</strong></a>
+          <a className="legal-back" href="/" aria-label={en ? 'Back to Gload Dramas' : '返回 Gload Dramas'}><span><ArrowLeft aria-hidden="true" /></span><img className="legal-brand-logo" src="/media/ui/brand-logo-tiktok-1024.png" alt="" /><strong>Gload Dramas</strong></a>
           <Select value={language} onValueChange={(value) => onLanguage(value as Language)}>
             <SelectTrigger className="legal-language-trigger" aria-label={en ? 'Document language' : '文档语言'}><LanguageIcon /><SelectValue /></SelectTrigger>
             <SelectContent className="legal-language-menu" position="popper" align="end"><SelectGroup><SelectItem value="zh-CN">简体中文</SelectItem><SelectItem value="en">English</SelectItem></SelectGroup></SelectContent>

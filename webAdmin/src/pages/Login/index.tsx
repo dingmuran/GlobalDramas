@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { history, useModel } from '@umijs/max';
 import { Alert, Button, message, Spin } from 'antd';
 import { useState } from 'react';
+import settings from '@root/config/defaultSettings';
 import { captcha, currentUser, login, menus, schema } from '@/services/api';
 import { queryClient } from '@/services/query';
 import { clearSession, setToken } from '@/services/session';
@@ -23,7 +24,7 @@ export default function Login() {
     <main className="login-shell">
       <section className="login-form-panel">
         <LoginForm
-          logo="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+          logo={settings.logo}
           title="Gload Dramas"
           subTitle="使用已授权的后台账号继续"
           submitter={{ searchConfig: { submitText: '登录' } }}

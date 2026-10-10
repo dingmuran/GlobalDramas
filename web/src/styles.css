@@ -2532,7 +2532,7 @@ body {
 .site-header > .brand > span { font-family: 'Nunito Variable', sans-serif; font-weight: 900; letter-spacing: -.6px; }
 .site-header .brand-light { font-weight: 900; }
 .legal-back strong { font-family: 'Nunito Variable', sans-serif; font-weight: 900; }
-.brand-logo, .legal-brand-logo { border-radius: 24%; }
+.brand-logo, .legal-brand-logo { border-radius: 0; }
 
 @media (max-width: 800px) { .header-icon > .viewer-user-icon { width: 32px; height: 32px; } }
 

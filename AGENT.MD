@@ -27,6 +27,7 @@
 - `server/`: Go + Gin 后端
 - `webAdmin/`: Ant Design Pro 官方模板：React + TypeScript + Umi Max + Ant Design 6
 - `web/`: React + Vite + TypeScript 观众H5前台基础工程
+- `mobile/`: React Native + Expo + TypeScript App 骨架，独立启动与原生导航
 - `packages/contracts/`: 前后台共享接口类型
 - `deploy/`: 部署资产
 - `docs/`: 项目文档与设计记录

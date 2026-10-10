@@ -23,3 +23,7 @@
 - 旧 #/about 自动变为 /about；剧集详情第 1 集自动播放，视频 readyState 4 且 currentTime 推进。
 - 仅部署 Web；后端、后台、数据库未部署。收藏等仍为浏览器 localStorage，视频仍使用授权样片。
 - 部署配置保存在 deploy/huanqiucs*.nginx.conf；本地发布包与说明位于 Downloads/GloadDramas-release。
+
+## 后续状态（2026-10-10）
+
+用户重新要求双域名 HTTPS，已启用现有免费证书和 HTTP 跳转，模拟续期成功；发布目录仍为 20261010-v2。详见 [双域名免费 HTTPS](viewer-web-https-enable.md)。

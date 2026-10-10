@@ -220,7 +220,7 @@ export default function App() {
     <>
       <header className={cn('site-header', route === '/' && 'header-home')}>
         <a className="brand" href="/" aria-label="Gload Dramas">
-          <img className="brand-logo" src="/media/ui/brand-logo.png" alt="" />
+          <img className="brand-logo" src="/media/ui/brand-logo-tiktok-1024.png" alt="" />
           <span>
             Gload<span className="brand-light"> Dramas</span>
           </span>

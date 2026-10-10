@@ -1,6 +1,6 @@
 {
-  "name": "Ant Design Pro",
-  "short_name": "Ant Design Pro",
+  "name": "Gload Dramas",
+  "short_name": "Gload Dramas",
   "display": "standalone",
   "start_url": "./?utm_source=homescreen",
   "theme_color": "#002140",
@@ -8,15 +8,18 @@
   "icons": [
     {
       "src": "icons/icon-192x192.png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
       "src": "icons/icon-128x128.png",
-      "sizes": "128x128"
+      "sizes": "128x128",
+      "type": "image/png"
     },
     {
       "src": "icons/icon-512x512.png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ]
 }
