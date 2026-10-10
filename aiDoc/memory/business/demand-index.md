@@ -107,3 +107,5 @@
 - [观众 Web 云服务器部署与无 hash 路由](done/viewer-web-cloud-deployment.md)（Nginx、HTTP、无 hash 路由；证书预留）
 
 - [首页热播榜单与 H5 登录弹窗优化](done/viewer-trending-ranking-login-mobile.md)（用户数字素材、桌面翻页、H5滑动与紧凑登录）
+
+- [仓库改名与介绍更新](done/repository-globaldramas-rename.md)（GlobalDramas、GitHub About、README）
